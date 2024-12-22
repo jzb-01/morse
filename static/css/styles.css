@@ -1,0 +1,12 @@
+body {
+    background-color: black;
+    color: white;
+}
+.time_line {
+    border: 2px solid orange;
+    opacity: 1;
+}
+.dates {
+    display: flex;
+    justify-content: space-between;
+}
