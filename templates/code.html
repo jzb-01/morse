@@ -3,17 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Play Tone</title>
 </head>
 <body>
- <h1>Convertion table</h1> 
- <table>
-  <thead>
-    <tr>
-      <th>Character</th>
-      <th>morse</th>
-    </tr>
-  </thead>
-</table>
+  <button id="playTone">Play Tone</button>
+
+  <script>
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    document.getElementById('playTone').addEventListener('click', () => {
+    if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }  
+      const oscillator = audioCtx.createOscillator();
+      oscillator.type = 'sine';
+      oscillator.frequency.setValueAtTime(600, audioCtx.currentTime);
+      oscillator.connect(audioCtx.destination);
+      oscillator.start();
+      setTimeout(() => oscillator.stop(), 1000); // Play tone for 100ms
+    });
+  </script>
 </body>
 </html>

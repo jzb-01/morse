@@ -23,3 +23,10 @@ const morseAlphabet = {
     ';': '-.-.-.', '=': '-...-',  '+': '.-.-.',  '-': '-....-', '_': '..--.-',
     '"': '.-..-.', '$': '...-..-', '@': '.--.-.', ' ': '/'
   };
+  const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  const oscillator = audioCtx.createOscillator();
+  oscillator.type = 'sine';
+  oscillator.frequency.setValueAtTime(600, audioCtx.currentTime);
+  oscillator.connect(audioCtx.destination);
+  oscillator.start();
+  setTimeout(() => oscillator.stop(), 100); 
