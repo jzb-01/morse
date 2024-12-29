@@ -38,11 +38,14 @@ document.getElementById('special').addEventListener('change', function() {
     console.log(list);
 });
 // Lista chocolateada
-for (let x = list.length-1; x >= 0; x--)
-{
-    let random = Math.floor(Math.random() * list.length);
-    let buffer = list[x];
-    list[x] = list[random];
-    list[random] = buffer;
+document.getElementById('start').addEventListener('click', function() {
+    for (let x = list.length-1; x >= 0; x--)
+        {
+            let random = Math.floor(Math.random() * list.length);
+            let buffer = list[x];
+            list[x] = list[random];
+            list[random] = buffer;
+        }
     console.log(list);
-}
+});
+
