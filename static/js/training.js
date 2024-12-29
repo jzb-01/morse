@@ -1,3 +1,5 @@
+// Imports from data.js
+import dictionary from './data.js';
 // Listas disponibles para entrenamiento
 const alphabet = [
     'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 
@@ -48,4 +50,15 @@ document.getElementById('start').addEventListener('click', function() {
         }
     console.log(list);
 });
-
+//Training
+document.getElementById('practice').addEventListener('click', function() {
+let level = 2;
+let accuracy;
+let practice = 0;
+while (practice != 50)
+{
+    let item = dictionary[list[Math.floor(Math.random() * level)]];
+    console.log(item);
+    practice++;
+}
+});
