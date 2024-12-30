@@ -56,9 +56,14 @@ document.getElementById('practice').addEventListener('click', function() {
 let level = 2;
 let accuracy;
 let koch = [];
-while (koch.length != 20 && accuracy < 90)
+while (level != list.length)
 {
-    let item = dictionary[list[Math.floor(Math.random() * level)]];
+while (accuracy <= 90)
+{
+    let random = Math.floor(Math.random() * level);
+    koch.push(list[random]);
+    let item = dictionary[list[random]];
+    let koch_input = document.getElementById("koch_input").value;
     const audioContext = new (window.AudioContext || window.webkitAudioContext)();
     const oscillator = audioContext.createOscillator();
     for (let x = 0; x < item.length; x++)
@@ -78,6 +83,20 @@ while (koch.length != 20 && accuracy < 90)
             setTimeout(() => oscillator.stop(), time_unit*3);
         }
     }
-    
 }
+level++;
+accuracy = 0;
+}
+document.getElementById("koch_input").addEventListener("keydown", function () {
+    if (koch.length >= 20 && koch.length == koch_input.length)
+    {
+        for (let x = koch.length-20; x < koch.length; x++)
+        {
+            if (koch[x] == koch_input[x])
+            {
+                accuracy = accuracy + 5;
+            }
+        }
+    } 
+})
 });
