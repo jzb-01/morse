@@ -51,14 +51,33 @@ document.getElementById('start').addEventListener('click', function() {
     console.log(list);
 });
 //Training
+let time_unit = document.getElementById("time").value;
 document.getElementById('practice').addEventListener('click', function() {
 let level = 2;
 let accuracy;
-let practice = 0;
-while (practice != 50)
+let koch = [];
+while (koch.length != 20 && accuracy < 90)
 {
     let item = dictionary[list[Math.floor(Math.random() * level)]];
-    console.log(item);
-    practice++;
+    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    const oscillator = audioContext.createOscillator();
+    for (let x = 0; x < item.length; x++)
+    {
+        if (item[x] == '.')
+        {
+            oscillator.frequency.setValueAtTime(600, audioCtx.currentTime);
+            oscillator.connect(audioCtx.destination);
+            oscillator.start();
+            setTimeout(() => oscillator.stop(), time_unit);
+        }
+        else if (item[x] == '-')
+        {
+            oscillator.frequency.setValueAtTime(600, audioCtx.currentTime);
+            oscillator.connect(audioCtx.destination);
+            oscillator.start();
+            setTimeout(() => oscillator.stop(), time_unit*3);
+        }
+    }
+    
 }
 });
