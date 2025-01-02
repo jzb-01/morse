@@ -1,16 +1,7 @@
 // Imports from data.js
-import dictionary from './data.js';
-// Listas disponibles para entrenamiento
-const alphabet = [
-    'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 
-    'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 
-    'U', 'V', 'W', 'X', 'Y', 'Z'
-  ];
-const numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
-const specialCharacters = [
-    '.', ',', '?', "'", '!', '/', '(', ')', '&', 
-    ':', ';', '=', '+', '-', '_', '"', '$', '@'
-  ];
+import { dictionary, alphabet, numbers, specialCharacters } from './data.js';
+// Imports from functions.js
+import { audioCtx, beep, delay } from './functions.js';
 // Listas seleccionadas por el usuario
 let list = [];
 document.getElementById('alphabet').addEventListener('change', function() {
@@ -50,42 +41,41 @@ document.getElementById('start').addEventListener('click', function() {
         }
     console.log(list);
 });
-//Training
-let time_unit = document.getElementById("time").value;
-document.getElementById('practice').addEventListener('click', function() {
+//Training variables
+let time_unit = Number(document.getElementById("time_unit").value);
+//Training function
+document.getElementById('practice').addEventListener('click', async function() {
 let level = 2;
-let accuracy;
+let accuracy = 0;
 let koch = [];
-while (level != list.length)
+while (level <= list.length)
 {
-while (accuracy <= 90)
-{
-    let random = Math.floor(Math.random() * level);
-    koch.push(list[random]);
-    let item = dictionary[list[random]];
-    let koch_input = document.getElementById("koch_input").value;
-    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-    const oscillator = audioContext.createOscillator();
-    for (let x = 0; x < item.length; x++)
+    while (accuracy < 90)
     {
-        if (item[x] == '.')
+        //Selección del item al azar
+        let random = Math.floor(Math.random() * level);
+        // Almacenamiento de item seleccionado
+        koch.push(list[random]);
+        //Reproducción de ítem seleccionado
+        let item = dictionary[list[random]];
+        for (let x = 0; x < item.length; x++)
         {
-            oscillator.frequency.setValueAtTime(600, audioCtx.currentTime);
-            oscillator.connect(audioCtx.destination);
-            oscillator.start();
-            setTimeout(() => oscillator.stop(), time_unit);
+            if (item[x] == '.')
+            {
+                beep(time_unit);
+            }
+            else if (item[x] == '-')
+            {
+                beep(time_unit*3);
+            }
+            await delay(time_unit);
         }
-        else if (item[x] == '-')
-        {
-            oscillator.frequency.setValueAtTime(600, audioCtx.currentTime);
-            oscillator.connect(audioCtx.destination);
-            oscillator.start();
-            setTimeout(() => oscillator.stop(), time_unit*3);
-        }
+        await delay(time_unit*3);
     }
-}
-level++;
-accuracy = 0;
+    //Comprobación del porcentaje de aciertos
+    level++;
+    accuracy = 0;
+    let koch_input = document.getElementById("koch_input").value;
 }
 document.getElementById("koch_input").addEventListener("keydown", function () {
     if (koch.length >= 20 && koch.length == koch_input.length)
