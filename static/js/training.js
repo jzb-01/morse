@@ -48,6 +48,19 @@ document.getElementById('practice').addEventListener('click', async function() {
 let level = 2;
 let accuracy = 0;
 let koch = [];
+let user_input = [];
+document.getElementById("koch_input").addEventListener('change', function() {
+    //Actualización de variable
+    user_input =  document.getElementById("koch_input").value;
+    //Comprobación del porcentaje de aciertos
+    for (let x = koch.length-20; x < koch.length; x++)
+    {
+        if (koch[x] == user_input[x])
+        {
+            accuracy = accuracy+5
+        }
+    }
+});
 while (level <= list.length)
 {
     while (accuracy < 90)
@@ -72,21 +85,7 @@ while (level <= list.length)
         }
         await delay(time_unit*3);
     }
-    //Comprobación del porcentaje de aciertos
     level++;
     accuracy = 0;
-    let koch_input = document.getElementById("koch_input").value;
 }
-document.getElementById("koch_input").addEventListener("keydown", function () {
-    if (koch.length >= 20 && koch.length == koch_input.length)
-    {
-        for (let x = koch.length-20; x < koch.length; x++)
-        {
-            if (koch[x] == koch_input[x])
-            {
-                accuracy = accuracy + 5;
-            }
-        }
-    } 
-})
 });
