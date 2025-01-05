@@ -1,35 +1,12 @@
 // Imports from data.js
 import { dictionary, alphabet, numbers, specialCharacters } from './data.js';
 // Imports from functions.js
-import { audioCtx, beep, delay } from './functions.js';
+import { audioCtx, beep, delay, checkls } from './functions.js';
 // Listas seleccionadas por el usuario
 let list = [];
-document.getElementById('alphabet').addEventListener('change', function() {
-    if (this.checked) {
-        list = list.concat(alphabet);
-    } else {
-        list = list.filter(item => !alphabet.includes(item));
-    }
-    console.log(list);
-});
-
-document.getElementById('numbers').addEventListener('change', function() {
-    if (this.checked) {
-        list = list.concat(numbers);
-    } else {
-        list = list.filter(item => !numbers.includes(item));
-    }
-    console.log(list);
-});
-
-document.getElementById('special').addEventListener('change', function() {
-    if (this.checked) {
-        list = list.concat(specialCharacters);
-    } else {
-        list = list.filter(item => !specialCharacters.includes(item));
-    }
-    console.log(list);
-});
+checkls('alphabet', alphabet, list);
+checkls('numbers', numbers, list);
+checkls('special', specialCharacters, list);
 // Lista chocolateada
 document.getElementById('start').addEventListener('click', function() {
     for (let x = list.length-1; x >= 0; x--)
@@ -70,6 +47,9 @@ while (level <= list.length)
         // Almacenamiento de item seleccionado
         koch.push(list[random]);
         //Reproducción de ítem seleccionado
+        if (audioCtx.state === 'suspended') {
+            audioCtx.resume();
+        }
         let item = dictionary[list[random]];
         for (let x = 0; x < item.length; x++)
         {
