@@ -7,6 +7,13 @@ let list = [];
 checkls('alphabet', alphabet, list);
 checkls('numbers', numbers, list);
 checkls('special', specialCharacters, list);
+// Tiempo seleccionado por el usuario
+let time_unit;
+document.getElementById("time_unit").addEventListener("change", function() {
+    if (isNaN(time_unit)) {
+        time_unit = Number(document.getElementById("time_unit").value);
+    }
+})
 // Lista chocolateada
 document.getElementById('start').addEventListener('click', function() {
     for (let x = list.length-1; x >= 0; x--)
@@ -18,10 +25,12 @@ document.getElementById('start').addEventListener('click', function() {
         }
     console.log(list);
 });
-//Training variables
-let time_unit = Number(document.getElementById("time_unit").value);
 //Training function
 document.getElementById('practice').addEventListener('click', async function() {
+//Reproducción de ítem seleccionado
+if (audioCtx.state === 'suspended') {
+    audioCtx.resume();
+}
 let level = 2;
 let accuracy = 0;
 let koch = [];
@@ -46,10 +55,6 @@ while (level <= list.length)
         let random = Math.floor(Math.random() * level);
         // Almacenamiento de item seleccionado
         koch.push(list[random]);
-        //Reproducción de ítem seleccionado
-        if (audioCtx.state === 'suspended') {
-            audioCtx.resume();
-        }
         let item = dictionary[list[random]];
         for (let x = 0; x < item.length; x++)
         {
