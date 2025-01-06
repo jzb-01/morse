@@ -14,8 +14,10 @@ document.getElementById("time_unit").addEventListener("change", function() {
         time_unit = Number(document.getElementById("time_unit").value);
     }
 })
-// Lista chocolateada
-document.getElementById('start').addEventListener('click', function() {
+// Training function
+document.getElementById('start').addEventListener('click', async function() {
+    await delay(3000);
+    // Lista chocolateada
     for (let x = list.length-1; x >= 0; x--)
         {
             let random = Math.floor(Math.random() * list.length);
@@ -24,53 +26,65 @@ document.getElementById('start').addEventListener('click', function() {
             list[random] = buffer;
         }
     console.log(list);
-});
-//Training function
-document.getElementById('practice').addEventListener('click', async function() {
-//Reproducción de ítem seleccionado
-if (audioCtx.state === 'suspended') {
-    audioCtx.resume();
-}
-let level = 2;
-let accuracy = 0;
-let koch = [];
-let user_input = [];
-document.getElementById("koch_input").addEventListener('change', function() {
-    //Actualización de variable
-    user_input =  document.getElementById("koch_input").value;
-    //Comprobación del porcentaje de aciertos
-    for (let x = koch.length-20; x < koch.length; x++)
-    {
-        if (koch[x] == user_input[x])
-        {
-            accuracy = accuracy+5
-        }
+    //Reproducción de ítem seleccionado
+    if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
     }
-});
-while (level <= list.length)
-{
-    while (accuracy < 90)
-    {
-        //Selección del item al azar
-        let random = Math.floor(Math.random() * level);
-        // Almacenamiento de item seleccionado
-        koch.push(list[random]);
-        let item = dictionary[list[random]];
-        for (let x = 0; x < item.length; x++)
+    let level = 2;
+        // Mostrar fracción de lista al usuario
+        let visible_list = [];
+        for (let x = 0; x < level; x++)
         {
-            if (item[x] == '.')
-            {
-                beep(time_unit);
-            }
-            else if (item[x] == '-')
-            {
-                beep(time_unit*3);
-            }
-            await delay(time_unit);
+            visible_list.push(list[x]);
         }
-        await delay(time_unit*3);
+        document.getElementById("visible_ls").innerHTML = visible_list.join("<br>");
+    let accuracy = 0;
+    let koch = [];
+    let user_input = [];
+    document.getElementById("koch_input").addEventListener('change', function() {
+        //Actualización de variable
+        user_input =  document.getElementById("koch_input").value;
+        //Comprobación del porcentaje de aciertos
+        for (let x = koch.length-20; x < koch.length; x++)
+        {
+            if (koch[x] == user_input[x])
+            {
+                accuracy = accuracy+5
+            }
+        }
+    });
+    while (level <= list.length)
+    {
+        while (accuracy < 90)
+        {
+            //Selección del item al azar
+            let random = Math.floor(Math.random() * level);
+            // Almacenamiento de item seleccionado
+            koch.push(list[random]);
+            let item = dictionary[list[random]];
+            for (let x = 0; x < item.length; x++)
+            {
+                if (item[x] == '.')
+                {
+                    beep(time_unit);
+                }
+                else if (item[x] == '-')
+                {
+                    beep(time_unit*3);
+                }
+                await delay(time_unit);
+            }
+            await delay(time_unit*3);
+        }
+        level++;
+        accuracy = 0;
+        const messageContainer = document.getElementById("message");
+        const messages = document.createElement("div");
+        messages.innerText = "you pass";
+        messageContainer.appendChild(messages);
+        setTimeout(() => {
+            messages.style.display = "none";
+        }, 3000);
+        await delay(3000);
     }
-    level++;
-    accuracy = 0;
-}
 });
