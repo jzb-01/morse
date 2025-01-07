@@ -2,22 +2,38 @@
 import { dictionary, alphabet, numbers, specialCharacters } from './data.js';
 // Imports from functions.js
 import { audioCtx, beep, delay, checkls } from './functions.js';
-// Listas seleccionadas por el usuario
+// Variable declarations
+let time_ms = document.getElementById("time_unit");
+let start_button = document.getElementById('start');
+let vls = document.getElementById("visible_ls");
+let k_input = document.getElementById("koch_input");
+
+
+// User settings
+/// Selected characters
 let list = [];
 checkls('alphabet', alphabet, list);
 checkls('numbers', numbers, list);
 checkls('special', specialCharacters, list);
-// Tiempo seleccionado por el usuario
+// Selected time unit
 let time_unit;
-document.getElementById("time_unit").addEventListener("change", function() {
+time_ms.addEventListener("change", function() {
     if (isNaN(time_unit)) {
-        time_unit = Number(document.getElementById("time_unit").value);
+        time_unit = Number(time_ms.value);
     }
 })
+
+
 // Training function
-document.getElementById('start').addEventListener('click', async function() {
-    await delay(3000);
-    // Lista chocolateada
+start_button.addEventListener('click', async function() {
+    /// Pre-settings
+    //// Variable declarations
+    let level = 2;
+    let accuracy = 0;
+    let koch = [];
+    let user_input = [];
+    let visible_list = [];
+    //// Scrambled characters
     for (let x = list.length-1; x >= 0; x--)
         {
             let random = Math.floor(Math.random() * list.length);
@@ -26,33 +42,20 @@ document.getElementById('start').addEventListener('click', async function() {
             list[random] = buffer;
         }
     console.log(list);
-    //Reproducción de ítem seleccionado
+    //// Displayed characters
+    for (let x = 0; x < level; x++)
+    {
+        visible_list.push(list[x]);
+    }
+    vls.innerHTML = visible_list.join("<br>");
+
+
+    /// Koch training
+    //// Audio context initialization
     if (audioCtx.state === 'suspended') {
         audioCtx.resume();
     }
-    let level = 2;
-        // Mostrar fracción de lista al usuario
-        let visible_list = [];
-        for (let x = 0; x < level; x++)
-        {
-            visible_list.push(list[x]);
-        }
-        document.getElementById("visible_ls").innerHTML = visible_list.join("<br>");
-    let accuracy = 0;
-    let koch = [];
-    let user_input = [];
-    document.getElementById("koch_input").addEventListener('change', function() {
-        //Actualización de variable
-        user_input =  document.getElementById("koch_input").value;
-        //Comprobación del porcentaje de aciertos
-        for (let x = koch.length-20; x < koch.length; x++)
-        {
-            if (koch[x] == user_input[x])
-            {
-                accuracy = accuracy+5
-            }
-        }
-    });
+    //// Morse output
     while (level <= list.length)
     {
         while (accuracy < 90)
@@ -87,4 +90,17 @@ document.getElementById('start').addEventListener('click', async function() {
         }, 3000);
         await delay(3000);
     }
+    //// Input evaluation
+    k_input.addEventListener('change', function() {
+        ///// Full input update
+        user_input =  document.getElementById("koch_input").value;
+        ///// Full input evaluation
+        for (let x = koch.length-20; x < koch.length; x++)
+        {
+            if (koch[x] == user_input[x])
+            {
+                accuracy = accuracy+5
+            }
+        }
+    });
 });
