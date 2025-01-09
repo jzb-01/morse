@@ -15,13 +15,6 @@ let list = [];
 checkls('alphabet', alphabet, list);
 checkls('numbers', numbers, list);
 checkls('special', specialCharacters, list);
-// Selected time unit
-let time_unit;
-time_ms.addEventListener("change", function() {
-    if (isNaN(time_unit)) {
-        time_unit = Number(time_ms.value);
-    }
-})
 
 
 // Training function
@@ -33,6 +26,11 @@ start_button.addEventListener('click', async function() {
     let koch = [];
     let user_input = [];
     let visible_list = [];
+    let time_unit;
+    //// Time unit set
+    if (isNaN(time_unit)) {
+        time_unit = Number(time_ms.value);
+    }
     //// Scrambled characters
     for (let x = list.length-1; x >= 0; x--)
         {
@@ -70,10 +68,12 @@ start_button.addEventListener('click', async function() {
                 if (item[x] == '.')
                 {
                     beep(time_unit);
+                    await delay(time_unit);
                 }
                 else if (item[x] == '-')
                 {
                     beep(time_unit*3);
+                    await delay(time_unit*3);
                 }
                 await delay(time_unit);
             }
