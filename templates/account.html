@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+{% block title %}
+    Account
+{% endblock %}
+{% block main %}
+<form action="/register" method="post">
+    <input autocomplete="off" autofocus name="email" placeholder="e-mail" type="text">
+    <input autocomplete="off" name="username" placeholder="User Name" type="text">
+    <input autocomplete="off" name="password" placeholder="Password" type="password">
+    <input autocomplete="off" name="confirmation" placeholder="Password again" type="password">
+    <button type="submit" name="register">Register!</button>
+</form>
+<form action="/login" method="post">
+    <input autocomplete="off" name="email-l" placeholder="e-mail" type="text">
+    <input autocomplete="off" name="password-l" placeholder="Password" type="password">
+    <button type="submit" name="login">Log in!</button>
+</form>
+{% endblock %}

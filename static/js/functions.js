@@ -33,4 +33,8 @@ function checkls(elementid, slista, list) {
     });
 }
 
-export { audioCtx, beep, delay, checkls };
+function updaterange(event) {
+    document.getElementById(event.target.dataset.target).textContent = event.target.value;
+}
+
+export { audioCtx, beep, delay, checkls, updaterange };

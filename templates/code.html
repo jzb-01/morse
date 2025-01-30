@@ -1,26 +1,103 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Play Tone</title>
-</head>
-<body>
-  <button id="playTone">Play Tone</button>
+{% extends "layout.html" %}
+{% block title %}
+Code
+{% endblock %}
+{% block js %}
+<script type="module" src="../static/js/code.js" defer></script> 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+{% endblock %}
+{% block main %}
 
-  <script>
-    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    document.getElementById('playTone').addEventListener('click', () => {
-    if (audioCtx.state === 'suspended') {
-        audioCtx.resume();
-      }  
-      const oscillator = audioCtx.createOscillator();
-      oscillator.type = 'sine';
-      oscillator.frequency.setValueAtTime(600, audioCtx.currentTime);
-      oscillator.connect(audioCtx.destination);
-      oscillator.start();
-      setTimeout(() => oscillator.stop(), 1000); // Play tone for 100ms
-    });
-  </script>
-</body>
-</html>
+<h1>Letters</h1>
+<button id="right">Right</button>
+<button id="left">Left</button>
+<table id="table_1" style="display: table;">
+  <thead>
+    <tr>
+      <th>Character</th>
+      <th>Morse Code</th>
+      <th>Play</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>A</td><td>.-</td><td><button><i class="fas fa-play"></i></button></td></tr>
+    <tr><td>B</td><td>-...</td><td><button><i class="fas fa-play"></i></button></td></tr>
+    <tr><td>C</td><td>-.-.</td><td><button><i class="fas fa-play"></i></button></td></tr>
+    <tr><td>D</td><td>-..</td><td><button><i class="fas fa-play"></i></button></td></tr>
+    <tr><td>E</td><td>.</td><td><button><i class="fas fa-play"></i></button></td></tr>
+    <tr><td>F</td><td>..-.</td><td><button><i class="fas fa-play"></i></button></td></tr>
+    <tr><td>G</td><td>--.</td><td><button><i class="fas fa-play"></i></button></td></tr>
+    <tr><td>H</td><td>....</td><td><button><i class="fas fa-play"></i></button></td></tr>
+    <tr><td>I</td><td>..</td><td><button><i class="fas fa-play"></i></button></td></tr>
+    <tr><td>J</td><td>.---</td><td><button><i class="fas fa-play"></i></button></td></tr>
+    <tr><td>K</td><td>-.-</td><td><button><i class="fas fa-play"></i></button></td></tr>
+    <tr><td>L</td><td>.-..</td><td><button><i class="fas fa-play"></i></button></td></tr>
+    <tr><td>M</td><td>--</td><td><button><i class="fas fa-play"></i></button></td></tr>
+    <tr><td>N</td><td>-.</td><td><button><i class="fas fa-play"></i></button></td></tr>
+    <tr><td>O</td><td>---</td><td><button><i class="fas fa-play"></i></button></td></tr>
+    <tr><td>P</td><td>.--.</td><td><button><i class="fas fa-play"></i></button></td></tr>
+    <tr><td>Q</td><td>--.-</td><td><button><i class="fas fa-play"></i></button></td></tr>
+    <tr><td>R</td><td>.-.</td><td><button><i class="fas fa-play"></i></button></td></tr>
+    <tr><td>S</td><td>...</td><td><button><i class="fas fa-play"></i></button></td></tr>
+    <tr><td>T</td><td>-</td><td><button><i class="fas fa-play"></i></button></td></tr>
+    <tr><td>U</td><td>..-</td><td><button><i class="fas fa-play"></i></button></td></tr>
+    <tr><td>V</td><td>...-</td><td><button><i class="fas fa-play"></i></button></td></tr>
+    <tr><td>W</td><td>.--</td><td><button><i class="fas fa-play"></i></button></td></tr>
+    <tr><td>X</td><td>-..-</td><td><button><i class="fas fa-play"></i></button></td></tr>
+    <tr><td>Y</td><td>-.--</td><td><button><i class="fas fa-play"></i></button></td></tr>
+    <tr><td>Z</td><td>--..</td><td><button><i class="fas fa-play"></i></button></td></tr>
+  </tbody>
+</table>
+<table id="table_2" style="display: none;">
+  <thead>
+    <tr>
+      <th>Character</th>
+      <th>Morse Code</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>0</td><td>-----</td><td><button><i class="fas fa-play"></i></button></td></tr>
+    <tr><td>1</td><td>.----</td><td><button><i class="fas fa-play"></i></button></td></tr>
+    <tr><td>2</td><td>..---</td><td><button><i class="fas fa-play"></i></button></td></tr>
+    <tr><td>3</td><td>...--</td><td><button><i class="fas fa-play"></i></button></td></tr>
+    <tr><td>4</td><td>....-</td><td><button><i class="fas fa-play"></i></button></td></tr>
+    <tr><td>5</td><td>.....</td><td><button><i class="fas fa-play"></i></button></td></tr>
+    <tr><td>6</td><td>-....</td><td><button><i class="fas fa-play"></i></button></td></tr>
+    <tr><td>7</td><td>--...</td><td><button><i class="fas fa-play"></i></button></td></tr>
+    <tr><td>8</td><td>---..</td><td><button><i class="fas fa-play"></i></button></td></tr>
+    <tr><td>9</td><td>----.</td><td><button><i class="fas fa-play"></i></button></td></tr>
+  </tbody>
+</table>
+<table id="table_3" style="display: none;">
+  <thead>
+    <tr>
+      <th>Character</th>
+      <th>Morse Code</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>.</td><td>.-.-.-</td><td><button><i class="fas fa-play"></i></button></td></tr>
+    <tr><td>,</td><td>--..--</td><td><button><i class="fas fa-play"></i></button></td></tr>
+    <tr><td>?</td><td>..--..</td><td><button><i class="fas fa-play"></i></button></td></tr>
+    <tr><td>'</td><td>.----.</td><td><button><i class="fas fa-play"></i></button></td></tr>
+    <tr><td>!</td><td>-.-.--</td><td><button><i class="fas fa-play"></i></button></td></tr>
+    <tr><td>/</td><td>-..-.</td><td><button><i class="fas fa-play"></i></button></td></tr>
+    <tr><td>(</td><td>-.--.</td><td><button><i class="fas fa-play"></i></button></td></tr>
+    <tr><td>)</td><td>-.--.-</td><td><button><i class="fas fa-play"></i></button></td></tr>
+    <tr><td>&</td><td>.-...</td><td><button><i class="fas fa-play"></i></button></td></tr>
+    <tr><td>:</td><td>---...</td><td><button><i class="fas fa-play"></i></button></td></tr>
+    <tr><td>;</td><td>-.-.-.</td><td><button><i class="fas fa-play"></i></button></td></tr>
+    <tr><td>=</td><td>-...-</td><td><button><i class="fas fa-play"></i></button></td></tr>
+    <tr><td>+</td><td>.-.-.</td><td><button><i class="fas fa-play"></i></button></td></tr>
+    <tr><td>-</td><td>-....-</td><td><button><i class="fas fa-play"></i></button></td></tr>
+    <tr><td>_</td><td>..--.-</td><td><button><i class="fas fa-play"></i></button></td></tr>
+    <tr><td>"</td><td>.-..-.</td><td><button><i class="fas fa-play"></i></button></td></tr>
+    <tr><td>$</td><td>...-..-</td><td><button><i class="fas fa-play"></i></button></td></tr>
+    <tr><td>@</td><td>.--.-.</td><td><button><i class="fas fa-play"></i></button></td></tr>
+    <tr><td> </td><td>/</td><td><button><i class="fas fa-play"></i></button></td></tr>
+  </tbody>
+</table>
+<div>time unit</div>
+    <input type="range" id="time_unit" min="100" max="1000" value="200" step="50" data-target="time_unit_value">
+    <span id="time_unit_value">200</span>
+{% endblock %}

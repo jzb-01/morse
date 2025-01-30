@@ -9,34 +9,44 @@
     <div id="telegraph_message"></div>
     <button id="telegraph_button">telegraph</button>  
     <button id="clear_button">clear</button>
+
+
     <div>time unit</div>
-    <input type="range" id="time_unit" min="100" max="500" value="200" step="50">
-    <span id="time_unit_value">1000</span>
+    <input type="range" id="time_unit" min="100" max="1000" value="200" step="50" data-target="time_unit_value">
+    <span id="time_unit_value">200</span>
+
     <div>dot min</div>
-    <input type ="range" id="dot_negative_margin" min="0" max="50" value="50" step="10">
+    <input type ="range" id="dot_negative_margin" min="0" max="50" value="50" step="10" data-target="dot_min_value">
     <span id="dot_min_value">50</span>
+
     <div>dot max</div>
-    <input type ="range" id="dot_positive_margin" min="0" max="50" value="50" step="10">
+    <input type ="range" id="dot_positive_margin" min="0" max="50" value="50" step="10" data-target="dot_max_value">
     <span id="dot_max_value">50</span>
+
     <div>dash min</div>
-    <input type ="range" id="dash_negative_margin" min="0" max="50" value="50" step="10">
+    <input type ="range" id="dash_negative_margin" min="0" max="50" value="50" step="10" data-target="dash_min_value">
     <span id="dash_min_value">50</span>
+
     <div>dash max</div>
-    <input type ="range" id="dash_positive_margin" min="0" max="50" value="50" step="10">
+    <input type ="range" id="dash_positive_margin" min="0" max="50" value="50" step="10" data-target="dash_max_value">
     <span id="dash_max_value">50</span>
+
     <div>letter space min</div>
-    <input type ="range" id="inter-letter_space_negative_margin" min="0" max="50" value="50" step="10">
+    <input type ="range" id="inter-letter_space_negative_margin" min="0" max="50" value="50" step="10" data-target="letter_min_value">
     <span id="letter_min_value">50</span>
+    
     <div>letter space max</div>
-    <input type ="range" id="inter-letter_space_positive_margin" min="0" max="50" value="50" step="10">
+    <input type ="range" id="inter-letter_space_positive_margin" min="0" max="50" value="50" step="10" data-target="letter_max_value">
     <span id="letter_max_value">50</span>
+
     <div>word space min</div>
-    <input type ="range" id="inter-word_space_negative_margin" min="0" max="50" value="50" step="10">
+    <input type ="range" id="inter-word_space_negative_margin" min="0" max="50" value="50" step="10" data-target="word_min_value">
     <span id="word_min_value">50</span>
+
     <div>word space max</div>
-    <input type ="range" id="inter-word_space_positive_margin" min="0" max="50" value="50" step="10">
+    <input type ="range" id="inter-word_space_positive_margin" min="0" max="50" value="50" step="10" data-target="word_max_value">
     <span id="word_max_value">50</span>
 
-    <script src="../static/js/telegraph.js" defer></script> 
+    <script type="module" src="../static/js/telegraph.js" defer></script> 
 </body>
 </html>

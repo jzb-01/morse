@@ -1,116 +1,108 @@
-const dictionary = {'A': '.-',    'B': '-...',  'C': '-.-.',  'D': '-..',   'E': '.',  
-  'F': '..-.',  'G': '--.',   'H': '....',  'I': '..',    'J': '.---',
-  'K': '-.-',   'L': '.-..',  'M': '--',    'N': '-.',    'O': '---', 
-  'P': '.--.',  'Q': '--.-',  'R': '.-.',   'S': '...',   'T': '-',   
-  'U': '..-',   'V': '...-',  'W': '.--',   'X': '-..-',  'Y': '-.--',
-  'Z': '--..',
+// Imports from data.js
+import { dictionary, reverse_dictionary} from './data.js';
 
-  '0': '-----', '1': '.----', '2': '..---', '3': '...--', '4': '....-', 
-  '5': '.....', '6': '-....', '7': '--...', '8': '---..', '9': '----.',
+// Variable declarations
+let text_box = document.getElementById("translator_text");
+let morse_box = document.getElementById("translator_morse");
 
-  '.': '.-.-.-', ',': '--..--', '?': '..--..', "'": '.----.', '!': '-.-.--',
-  '/': '-..-.',  '(': '-.--.',  ')': '-.--.-', '&': '.-...', ':': '---...',
-  ';': '-.-.-.', '=': '-...-',  '+': '.-.-.',  '-': '-....-', '_': '..--.-',
-  '"': '.-..-.', '$': '...-..-', '@': '.--.-.', ' ': '/'
-};
-const reverse_dictionary = {
-  '.-': 'A', '-...': 'B', '-.-.': 'C', '-..': 'D', '.': 'E',
-  '..-.': 'F', '--.': 'G', '....': 'H', '..': 'I', '.---': 'J',
-  '-.-': 'K', '.-..': 'L', '--': 'M', '-.': 'N', '---': 'O',
-  '.--.': 'P', '--.-': 'Q', '.-.': 'R', '...': 'S', '-': 'T',
-  '..-': 'U', '...-': 'V', '.--': 'W', '-..-': 'X', '-.--': 'Y',
-  '--..': 'Z', '-----': '0', '.----': '1', '..---': '2', '...--': '3',
-  '....-': '4', '.....': '5', '-....': '6', '--...': '7', '---..': '8',
-  '----.': '9', '.-.-.-': '.', '--..--': ',', '..--..': '?', '.----.': "'",
-  '-.-.--': '!', '-..-.': '/', '-.--.': '(', '-.--.-': ')', '.-...': '&',
-  '---...': ':', '-.-.-.': ';', '-...-': '=', '.-.-.': '+', '-....-': '-',
-  '..--.-': '_', '.-..-.': '"', '...-..-': '$', '.--.-.': '@', '/': ' '
-};
-let input_text = document.getElementById("translator_text");
-let input_morse = document.getElementById("translator_morse");
-input_text.addEventListener("input", function(event){
-    let text_value = event.target.value;
-    let morsecode = "";
-    for (let x = 0; x < text_value.length; x++)
-    {
-      let characters = text_value[x];
-      let character = characters.toUpperCase();
-      morsecode += dictionary[character] + " ";
-    }
-    input_morse.value = morsecode;
-});
-input_morse.addEventListener("input", function(event){
-  const allowed_characters = ['.', '-', '/', ' '];
-  let input_value = event.target.value;
-  let filter = "";
-  let textcode = "";
-  let buffer = "";
-  for (let x = 0; x < input_value.length; x++)
+// Text to Morse
+text_box.addEventListener("input", function(event){
+  /// Filter
+  let buffer = '';
+  for (let x = 0; x < text_box.value.length; x++)
   {
-    if (allowed_characters.includes(input_value[x]))
+    if (dictionary.hasOwnProperty(text_box.value[x].toUpperCase()))
     {
-      if (input_value[x] === ' ')
-      {
-        if (filter.endsWith(' '))
-        {
-          continue;
-        }
-        else
-        {
-          filter += input_value[x];
-        }
-      }
-      else
-      {
-        filter += input_value[x];
-      }
+      buffer += text_box.value[x].toUpperCase();
     }
   }
-  input_value = filter;
-  event.target.value = filter;
-  for (let x = 0; x < input_value.length; x++)
+  text_box.value = buffer;
+  ///Translation
+  let morse_translation = "";
+  for (let x = 0; x < text_box.value.length; x++)
   {
-    buffer += input_value[x];
-    if (input_value[x] == '/')
-      {
-        let temp_buffer = buffer.slice(0, buffer.length - 1);
-        if (reverse_dictionary.hasOwnProperty(temp_buffer))
-        {
-          textcode += reverse_dictionary[temp_buffer];
-          textcode += ' ';
-          buffer = '';
-        }
-        else
-        {
-          textcode += '<b>' + buffer + '</b>';
-          textcode += ' ';
-        }
-      }
-    else if (input_value[x] == ' ')
-      {
-        let temp_buffer = buffer.slice(0, buffer.length - 1);
-        if (reverse_dictionary.hasOwnProperty(temp_buffer))
-        {
-          textcode += reverse_dictionary[temp_buffer];
-          buffer = '';
-        }
-        else
-        {
-          textcode += '<b>' + buffer + '</b>';
-        }
-      }
-    else if (x == input_value.length-1)
+    morse_translation += dictionary[text_box.value[x]] + " ";
+  }
+  morse_box.value = morse_translation;
+});
+
+//Morse to Text
+morse_box.addEventListener("input", function(event){
+
+  // Filter
+  morse_box.value = morse_box.value.trimStart();
+  const validMorse = /^[.\- /]*$/;
+  /// Remove invalid characters
+  if (!validMorse.test(morse_box.value)) {
+    morse_box.value = morse_box.value.replace(/[^.\- /]/g, '');
+  }
+  /// Replace multiple spaces with a single space
+  morse_box.value = morse_box.value.replace(/\s{2,}/g, ' ');
+  /// Adds a space before and after a slash
+  morse_box.value = morse_box.value.replace(/ ?\/ ?/g, ' / ');
+
+if (event.inputType === "deleteContentBackward" && morse_box.value.length >= 3 &&
+    morse_box.value[morse_box.value.length-1] === " " &&
+    morse_box.value[morse_box.value.length - 2] === "/" &&
+    morse_box.value[morse_box.value.length - 3] === " ") {
+  morse_box.value = morse_box.value.slice(0, - 3);
+}
+console.log("Cursor Position:", cursorPosition);
+console.log("Characters around cursor:", morse_box.value.slice(cursorPosition - 3, cursorPosition + 1));
+
+  //Translation
+  
+  let text_translation = "";
+  let buffer = "";
+
+  for (let x = 0; x < morse_box.value.length; x++)
+  {
+    if (morse_box.value[x] == '.' || morse_box.value[x] == '-')
+    {
+      buffer += morse_box.value[x];
+    }
+    else if (morse_box.value[x] == '/')
       {
         if (reverse_dictionary.hasOwnProperty(buffer))
         {
-          textcode += reverse_dictionary[buffer];
+          text_translation += reverse_dictionary[buffer];
+          text_translation += ' ';
           buffer = '';
         }
         else
-          {
-            textcode += '<b>' + buffer + '</b>';
-          }
+        {
+          text_translation += '#';
+          text_translation += ' ';
+          buffer = '';
+        }
+      }
+    else if (morse_box.value[x] == ' ')
+      {
+        if (reverse_dictionary.hasOwnProperty(buffer))
+        {
+          text_translation += reverse_dictionary[buffer];
+          buffer = '';
+        }
+        else
+        {
+          text_translation += '#';
+          buffer = '';
+        }
       }
   }
-  input_text.value = textcode;
+  if (!buffer)
+  {
+    return;
+  }
+  if (reverse_dictionary.hasOwnProperty(buffer))
+    {
+      text_translation += reverse_dictionary[buffer];
+      buffer = '';
+    }
+  else
+    {
+      text_translation += '#';
+      buffer = '';
+    }
+  text_box.value = text_translation;
   });

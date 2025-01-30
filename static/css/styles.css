@@ -1,12 +1,63 @@
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
 body {
-    background-color: black;
-    color: white;
+  margin: 0;
+  background-image: url('/static/images/cowprint.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
 }
-.time_line {
-    border: 2px solid orange;
-    opacity: 1;
+
+#top_navbar {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #000000;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-around; /* Adjusts spacing for top navbar items */
 }
-.dates {
-    display: flex;
-    justify-content: space-between;
+
+#bottom_navbar {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  background-color: #000000;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  display: flex; /* Make the navbar a flex container */
+  justify-content: center; /* Center the items horizontally */
+  align-items: center; /* Center the items vertically */
+}
+
+li {
+  margin: 0; /* Remove margin to avoid unintended gaps */
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover {
+  background-color: #111;
+}
+.scroll-box {
+  width: 80%;
+  height: 400px;
+  margin: auto;
+  overflow: auto;
+  border: 8px solid #000;
+  border-radius: 15px;
+  background-color: #fff;
 }

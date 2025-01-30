@@ -1,0 +1,40 @@
+// Filter
+morse_box.value = morse_box.value.trimStart();
+const validMorse = /^[.\- /]*$/;
+/// Remove invalid characters
+if (!validMorse.test(morse_box.value)) {
+  morse_box.value = morse_box.value.replace(/[^.\- /]/g, '');
+}
+/// Replace multiple spaces with a single space
+morse_box.value = morse_box.value.replace(/\s{2,}/g, ' ');
+
+/// Replace spaces after slashes with a single slash
+morse_box.value = morse_box.value.replace(/\/\s+/g, '/');
+
+
+
+
+if (event.inputType === "deleteContentBackward" && cursorPosition >= 3 &&
+    morse_box.value[cursorPosition-1] === " " &&
+    morse_box.value[cursorPosition - 2] === "/" &&
+    morse_box.value[cursorPosition - 3] === " ") {
+  morse_box.value = morse_box.value.slice(0, cursorPosition - 3) + morse_box.value.slice(cursorPosition);
+}
+
+
+
+
+You can use JavaScript to dynamically get the Morse code from the row. Here's a general idea:
+
+Add an onclick attribute to the button that calls a function.
+In the function, use JavaScript to find the Morse code in the same row as the button.
+For example:
+
+<td><button onclick="executeFunction(this)">Execute</button></td>
+In your JavaScript:
+
+function executeFunction(button) {
+    var morseCode = button.parentElement.previousElementSibling.textContent;
+    // Now you can use morseCode as needed
+}
+This way, the function will automatically get the Morse code from the row where the button was clicked.
