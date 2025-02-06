@@ -13,16 +13,6 @@ Session(app)
 
 db = SQL("sqlite:///morse.db")
 
-db.execute('''
-CREATE TABLE IF NOT EXISTS Register (
-    id INTEGER PRIMARY KEY,
-    username TEXT NOT NULL UNIQUE,
-    password TEXT NOT NULL,
-    email TEXT NOT NULL UNIQUE,
-    creation DATETIME DEFAULT CURRENT_TIMESTAMP
-)
-''')
-
 # Routes--------------------------------------------------------------------------------------
 
 @app.route("/")
@@ -41,6 +31,10 @@ def code():
 def characters():
     return render_template("translator.html")
 
+@app.route("/archives")
+def archives():
+    return render_template("archives.html")
+
 @app.route("/account", methods=["GET", "POST"])
 def account():
     if request.method == "POST":
@@ -58,7 +52,7 @@ def account():
                 return render_template("failure.html")
             hashed_password = generate_password_hash(password)
             db.execute("INSERT INTO Register (username, password, email) VALUES(?, ?, ?)", username, hashed_password, email)
-            session["id"] = db.execute("SELECT id FROM Register WHERE username = ? AND amail = ?", username, email) #this is wrongggg
+            session["id"] = db.execute("SELECT id FROM Register WHERE username = ? AND email = ?", username, email)[0]["id"]
             return redirect("/")
             
         elif "login" in request.form:
