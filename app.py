@@ -31,8 +31,14 @@ def code():
 def characters():
     return render_template("translator.html")
 
-@app.route("/archives")
+@app.route("/archives", methods=["GET", "POST"])
 def archives():
+    if request.method == "POST":
+        message_id = request.form.get("story_id")
+        if not message_id:
+            return render_template("failure.html")
+        message = db.execute("SELECT * FROM archives WHERE id = ?", message_id)[0]["story"]
+        return render_template("message.html", message=message)
     return render_template("archives.html")
 
 @app.route("/account", methods=["GET", "POST"])

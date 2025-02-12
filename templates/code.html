@@ -8,9 +8,12 @@ Code
 {% endblock %}
 {% block main %}
 
-<h1>Letters</h1>
-<button id="right">Right</button>
+<div style="display: flex;">
 <button id="left">Left</button>
+<h1 class="normal-box">Letters</h1>
+<button id="right">Right</button>
+</div>
+<div class="small-box">
 <table id="table_1" style="display: table;">
   <thead>
     <tr>
@@ -97,7 +100,10 @@ Code
     <tr><td> </td><td>/</td><td><button><i class="fas fa-play"></i></button></td></tr>
   </tbody>
 </table>
+</div>
+<div style="display: flex;">
 <div>time unit</div>
-    <input type="range" id="time_unit" min="100" max="1000" value="200" step="50" data-target="time_unit_value">
-    <span id="time_unit_value">200</span>
+<input type="range" id="time_unit" min="100" max="1000" value="200" step="50" data-target="time_unit_value">
+<span id="time_unit_value">200</span>
+</div>
 {% endblock %}

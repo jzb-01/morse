@@ -10,6 +10,14 @@ body {
   background-repeat: no-repeat;
   background-position: center center;
 }
+main {
+  display: flex;
+  flex-direction: column;       /* Stack children vertically */
+  justify-content: flex-start;  /* Align children at the top */
+  align-items: center;          /* Center children horizontally */
+  min-height: 100vh;
+  text-align: center;      
+}
 
 #top_navbar {
   list-style-type: none;
@@ -54,10 +62,31 @@ li a:hover {
 }
 .scroll-box {
   width: 80%;
-  height: 400px;
+  height: 600px;
   margin: auto;
   overflow: auto;
   border: 8px solid #000;
   border-radius: 15px;
   background-color: #fff;
+}
+.small-box {
+  width: 80%;
+  height: 500px;
+  margin: auto;
+  overflow: auto;
+  border: 8px solid #000;
+  border-radius: 15px;
+  background-color: #fff;
+}
+.normal-box {
+  width: 60%;
+  max-width: 800px; /* Optional: Prevents it from getting too wide */
+  min-height: 10px; /* Ensures a small minimum size */
+  padding: 20px; /* Adds spacing inside */
+  margin: auto;
+  overflow: auto; /* Keeps scrolling if content overflows */
+  border: 8px solid #000;
+  border-radius: 15px;
+  background-color: #fff;
+  display: inline-block; /* Allows it to shrink-wrap content */
 }
