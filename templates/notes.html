@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+{% block title %}
+    Notes
+{% endblock %}
+{% block js %}
+<script type="module" src="../static/js/notes.js" defer></script> 
+{% endblock %}
+{% block main %}
+{% if notes %}
+    <div class="box fixed-box">
+        {% for note in notes%}
+        <button>note{{ loop.index }}</button>
+        {% endfor %}
+    </div>
+{% else %}
+    <p>There arent any notes yet :)</p>
+{% endif %}
+{% endblock %}

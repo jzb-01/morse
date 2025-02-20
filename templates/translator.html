@@ -1,13 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script src="/static/js/translator.js" type="module" defer></script>
-</head>
-<body>
-    <input id="translator_text">
-    <input id="translator_morse">
-</body>
-</html>
+{% extends "layout.html" %}
+{% block title %}
+    Translator
+{% endblock %}
+{% block js %}
+<script src="/static/js/translator.js" type="module" defer></script>
+{% endblock %}
+{% block main %}
+<input id="translator_text">
+<input id="translator_morse">
+{% endblock %}

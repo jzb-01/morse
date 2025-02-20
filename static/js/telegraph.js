@@ -1,8 +1,9 @@
-// Imports from functions.js
-import { updaterange } from "./functions.js";
-// Range value actualization in html
-document.querySelectorAll('[data-target]').forEach(element => {
-    element.addEventListener('input', updaterange);
+// Settings window display
+document.getElementById('settings').addEventListener('click', function(){
+    document.getElementById('settings_window').style.display = "block"
+});
+document.getElementById('settings_done').addEventListener('click', function(){
+    document.getElementById('settings_window').style.display = "none"
 });
 // Variable Initialization: time unit and margins percentages
 let time_unit = Number(document.getElementById("time_unit").value);
@@ -15,7 +16,8 @@ let letter_max = ((time_unit*3)/100) * Number(document.getElementById("inter-let
 let word_min = ((time_unit*7)/100) * Number(document.getElementById("inter-word_space_negative_margin").value);
 let word_max = ((time_unit*7)/100) * Number(document.getElementById("inter-word_space_positive_margin").value);
 // Variables actualization - Time Unit
-document.getElementById('time_unit').addEventListener('input', function() {
+document.getElementById('time_unit').addEventListener('input', function(event) {
+    document.getElementById('time_unit_value').textContent = event.target.value;
     time_unit = Number(document.getElementById("time_unit").value);
     dot_min = (time_unit/100) * Number(document.getElementById("dot_negative_margin").value);
     dot_max = (time_unit/100) * Number(document.getElementById("dot_positive_margin").value);
@@ -27,28 +29,36 @@ document.getElementById('time_unit').addEventListener('input', function() {
     word_max = ((time_unit*7)/100) * Number(document.getElementById("inter-word_space_positive_margin").value);
 });
 // Variables actualization - Margins
-document.getElementById("dot_negative_margin").addEventListener("input", function(){
+document.getElementById("dot_negative_margin").addEventListener("input", function(event){
+    document.getElementById('dot_min_value').textContent = event.target.value;
     dot_min = (time_unit/100) * Number(document.getElementById("dot_negative_margin").value);
 });
-document.getElementById("dot_positive_margin").addEventListener("input", function(){
+document.getElementById("dot_positive_margin").addEventListener("input", function(event){
+    document.getElementById('dot_max_value').textContent = event.target.value;
     dot_max = (time_unit/100) * Number(document.getElementById("dot_positive_margin").value);
 });
-document.getElementById("dash_negative_margin").addEventListener("input", function(){
+document.getElementById("dash_negative_margin").addEventListener("input", function(event){
+    document.getElementById('dash_min_value').textContent = event.target.value;
     dash_min = ((time_unit*3)/100) * Number(document.getElementById("dash_negative_margin").value);
 });
-document.getElementById("dash_positive_margin").addEventListener("input", function(){
+document.getElementById("dash_positive_margin").addEventListener("input", function(event){
+    document.getElementById('dash_max_value').textContent = event.target.value;
     dash_max = ((time_unit*3)/100) * Number(document.getElementById("dash_positive_margin").value);
 });
-document.getElementById("inter-letter_space_negative_margin").addEventListener("input", function(){
+document.getElementById("inter-letter_space_negative_margin").addEventListener("input", function(event){
+    document.getElementById('letter_min_value').textContent = event.target.value;
     letter_min = ((time_unit*3)/100) * Number(document.getElementById("inter-letter_space_negative_margin").value);
 });
-document.getElementById("inter-letter_space_positive_margin").addEventListener("input", function(){
+document.getElementById("inter-letter_space_positive_margin").addEventListener("input", function(event){
+    document.getElementById('letter_max_value').textContent = event.target.value;
     letter_max = ((time_unit*3)/100) * Number(document.getElementById("inter-letter_space_positive_margin").value);
 });
-document.getElementById("inter-word_space_negative_margin").addEventListener("input", function(){
+document.getElementById("inter-word_space_negative_margin").addEventListener("input", function(event){
+    document.getElementById('word_min_value').textContent = event.target.value;
     word_min = ((time_unit*7)/100) * Number(document.getElementById("inter-word_space_negative_margin").value);
 });
-document.getElementById("inter-word_space_positive_margin").addEventListener("input", function(){
+document.getElementById("inter-word_space_positive_margin").addEventListener("input", function(event){
+    document.getElementById('word_max_value').textContent = event.target.value;
     word_max = ((time_unit*7)/100) * Number(document.getElementById("inter-word_space_positive_margin").value);
 });
 // Telegraph

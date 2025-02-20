@@ -28,8 +28,16 @@ def code():
      return render_template("code.html")
 
 @app.route("/translator")
-def characters():
+def translator():
     return render_template("translator.html")
+
+@app.route("/telegraph")
+def telegraph():
+    return render_template("telegraph.html")
+
+@app.route("/training")
+def training():
+    return render_template("training.html")
 
 @app.route("/archives", methods=["GET", "POST"])
 def archives():
@@ -40,6 +48,19 @@ def archives():
         message = db.execute("SELECT * FROM archives WHERE id = ?", message_id)[0]["story"]
         return render_template("message.html", message=message)
     return render_template("archives.html")
+
+@app.route("/notes", methods=["GET", "POST"])
+def notes():
+    if session.get("id"):
+        notes = db.execute("SELECT note FROM note WHERE user_id = ?", session["id"])
+        return render_template("notes.html", notes=notes)
+    else:
+        return render_template("notes.html")
+
+@app.route("/blackbox", methods=["GET", "POST"])
+def blackbox():
+    blackbox = db.execute("SELECT * FROM blackbox")
+    return render_template("blackbox.html", blackbox=blackbox)
 
 @app.route("/account", methods=["GET", "POST"])
 def account():
@@ -68,8 +89,8 @@ def account():
                 return render_template("failure.html")
             row = db.execute("SELECT * FROM Register WHERE email = ?", email)
             if row:
-                if check_password_hash(row[password], password):
-                    session["id"] = row[id]
+                if check_password_hash(row[0]["password"], password):
+                    session["id"] = row[0]["id"]
                     return redirect("/")
     return render_template("account.html")
 

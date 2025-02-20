@@ -1,20 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+{% extends "layout.html" %}
+{% block title %}
+    Training
+{% endblock %}
+{% block js %}
+<script type="module" src="../static/js/training.js" defer></script>
+{% endblock %}
+{% block main %}
     <input type="checkbox" id="alphabet" name="alphabet" value="Option 1"> Alphabet<br>
     <input type="checkbox" id="numbers" name="numbers" value="Option 2"> Numbers<br>
     <input type="checkbox" id="special" name="special" value="Option 3"> Special Characters<br>
-    <input type="number"  min ="100" max="1000" id="time_unit" value="200">
+    <input type="range" id="time_unit" min="100" max="1000" value="200" step="50">
+    <span id="time_unit_value">200</span>
     <div id="visible_ls"></div>
-    <input id="koch_input">
+    <input id="user_input">
     <button id="start">Start</button>
-    <button id="practice">Practice</button>
+    <button id="stop">Stop</button>
+    <button id="evaluation" disabled="true">Evaluation</button>
     <div id="message"></div>
-    <script type="module" src="../static/js/training.js" defer></script> 
-</body>
-</html>
+{% endblock %}

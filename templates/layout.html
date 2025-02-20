@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{% block title %} {% endblock %}</title>
-  <link rel="stylesheet" href="/static/css/styles.css">
-  {% block js %} {% endblock %}
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{% block title %}{% endblock %}</title>
+  <link rel="stylesheet" href="/static/css/styles.css" />
+  {% block js %}{% endblock %}
 </head>
 <body>
   <header>
@@ -15,22 +15,24 @@
         <li><a href="/morse">Morse</a></li>
         <li><a href="/code">Code</a></li>
         <li><a href="/archives">Archives</a></li>
-        <li><a href="#servi">Notes</a></li>
-        <li><a href="#contact">Blackbox</a></li>
+        <li><a href="/notes">Notes</a></li>
+        <li><a href="/blackbox">Blackbox</a></li>
         <li><a href="/account">Account</a></li>
       </ul>
     </nav>
   </header>
+  
   <main>
-  {% block main %}
-  {% endblock %}
+    {% block main %}
+    {% endblock %}
   </main>
+  
   <footer>
     <nav>
       <ul id="bottom_navbar">
-        <li><a href="#home">Translator</a></li>
-        <li><a href="#about">Telegraph</a></li>
-        <li><a href="#services">Training</a></li>
+        <li><a href="/translator">Translator</a></li>
+        <li><a href="/telegraph">Telegraph</a></li>
+        <li><a href="/training">Training</a></li>
       </ul>
     </nav>
   </footer>

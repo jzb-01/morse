@@ -1,52 +1,54 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <div id="telegraph_message"></div>
+{% extends "layout.html" %}
+{% block title %}
+    Telegraph
+{% endblock %}
+{% block js %}
+<script type="module" src="../static/js/telegraph.js" defer></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+{% endblock %}
+{% block main %}
+<div id="telegraph_message"></div>
     <button id="telegraph_button">telegraph</button>  
     <button id="clear_button">clear</button>
+    <button id="settings"><i class="fa fa-cog"></i></button>
 
-
+<div id="settings_window" style="display: none;">
     <div>time unit</div>
-    <input type="range" id="time_unit" min="100" max="1000" value="200" step="50" data-target="time_unit_value">
+    <input type="range" id="time_unit" min="100" max="1000" value="200" step="50">
     <span id="time_unit_value">200</span>
 
     <div>dot min</div>
-    <input type ="range" id="dot_negative_margin" min="0" max="50" value="50" step="10" data-target="dot_min_value">
+    <input type ="range" id="dot_negative_margin" min="0" max="50" value="50" step="10">
     <span id="dot_min_value">50</span>
 
     <div>dot max</div>
-    <input type ="range" id="dot_positive_margin" min="0" max="50" value="50" step="10" data-target="dot_max_value">
+    <input type ="range" id="dot_positive_margin" min="0" max="50" value="50" step="10">
     <span id="dot_max_value">50</span>
 
     <div>dash min</div>
-    <input type ="range" id="dash_negative_margin" min="0" max="50" value="50" step="10" data-target="dash_min_value">
+    <input type ="range" id="dash_negative_margin" min="0" max="50" value="50" step="10">
     <span id="dash_min_value">50</span>
 
     <div>dash max</div>
-    <input type ="range" id="dash_positive_margin" min="0" max="50" value="50" step="10" data-target="dash_max_value">
+    <input type ="range" id="dash_positive_margin" min="0" max="50" value="50" step="10">
     <span id="dash_max_value">50</span>
 
     <div>letter space min</div>
-    <input type ="range" id="inter-letter_space_negative_margin" min="0" max="50" value="50" step="10" data-target="letter_min_value">
+    <input type ="range" id="inter-letter_space_negative_margin" min="0" max="50" value="50" step="10">
     <span id="letter_min_value">50</span>
     
     <div>letter space max</div>
-    <input type ="range" id="inter-letter_space_positive_margin" min="0" max="50" value="50" step="10" data-target="letter_max_value">
+    <input type ="range" id="inter-letter_space_positive_margin" min="0" max="50" value="50" step="10">
     <span id="letter_max_value">50</span>
 
     <div>word space min</div>
-    <input type ="range" id="inter-word_space_negative_margin" min="0" max="50" value="50" step="10" data-target="word_min_value">
+    <input type ="range" id="inter-word_space_negative_margin" min="0" max="50" value="50" step="10">
     <span id="word_min_value">50</span>
 
     <div>word space max</div>
-    <input type ="range" id="inter-word_space_positive_margin" min="0" max="50" value="50" step="10" data-target="word_max_value">
+    <input type ="range" id="inter-word_space_positive_margin" min="0" max="50" value="50" step="10">
     <span id="word_max_value">50</span>
 
-    <script type="module" src="../static/js/telegraph.js" defer></script> 
-</body>
-</html>
+    <button id="settings_done">Done</button>
+</div>
+{% endblock %}

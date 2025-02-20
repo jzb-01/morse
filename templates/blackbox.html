@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+{% block title %}
+    Blackbox
+{% endblock %}
+{% block js %}
+<script type="module" src="../static/js/notes.js" defer></script> 
+{% endblock %}
+{% block main %}
+{% if blackbox %}
+    <div class="box fixed-box">
+        <table>
+            {% for blackbox in blackbox %}
+            <th>user</th>
+            <tr>blackbox.user_id</tr>
+            <th>log</th>
+            <tr>blackbox.log</tr>
+            {% endfor %}
+        </table>
+    </div>
+{% else %}
+    <p>There arent any logs yet :)</p>
+{% endif %}
+{% endblock %}

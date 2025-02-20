@@ -9,11 +9,17 @@ Code
 {% block main %}
 
 <div style="display: flex;">
-<button id="left">Left</button>
-<h1 class="normal-box">Letters</h1>
-<button id="right">Right</button>
+<button id="left"><svg width="40" height="40" viewBox="0 0 24 24">
+  <path d="M15 18l-6-6 6-6" stroke="black" stroke-width="2" fill="none"/>
+</svg>
+</button>
+<h1 class="box flexible-box">Letters</h1>
+<button id="right"><svg width="40" height="40" viewBox="0 0 24 24">
+  <path d="M9 18l6-6-6-6" stroke="black" stroke-width="2" fill="none"/>
+</svg>
+</button>
 </div>
-<div class="small-box">
+<div class="box fixed-box">
 <table id="table_1" style="display: table;">
   <thead>
     <tr>
@@ -101,7 +107,7 @@ Code
   </tbody>
 </table>
 </div>
-<div style="display: flex;">
+<div class="box" style="display: flex; align-items: center; gap: 10px;">
 <div>time unit</div>
 <input type="range" id="time_unit" min="100" max="1000" value="200" step="50" data-target="time_unit_value">
 <span id="time_unit_value">200</span>

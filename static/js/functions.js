@@ -13,28 +13,34 @@ function delay(duration) {
     return new Promise(resolve => setTimeout(resolve, duration));
 }
 
-function checkls(elementid, slista, list) {
-    document.getElementById(elementid).addEventListener('change', function() {
+function checkls(element_id, characters, final_list) {
+    document.getElementById(element_id).addEventListener('change', function() {
         if (this.checked) {
-            slista.forEach(item => {
-                if (!list.includes(item)) {
+            characters.forEach(item => {
+                if (!final_list.includes(item)) {
                     list.push(item);
                 }
             });
         } else {
-            slista.forEach(item => {
-                const index = list.indexOf(item);
+            characters.forEach(item => {
+                const index = final_list.indexOf(item);
                 if (index > -1) {
-                    list.splice(index, 1);
+                    final_list.splice(index, 1);
                 }
             });
         }
-        console.log(list);
+        if (!final_list.length == 0)
+        {
+            for (let x = final_list.length-1; x >= 0; x--)
+                {
+                    let random = Math.floor(Math.random() * final_list.length);
+                    let buffer = final_list[x];
+                    final_list[x] = final_list[random];
+                    final_list[random] = buffer;
+                }
+            console.log(final_list);
+        }
     });
 }
 
-function updaterange(event) {
-    document.getElementById(event.target.dataset.target).textContent = event.target.value;
-}
-
-export { audioCtx, beep, delay, checkls, updaterange };
+export { audioCtx, beep, delay, checkls };

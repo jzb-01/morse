@@ -1,92 +1,117 @@
+/* ///First part: For the layout/// */
+/* This is for the size and background of the body */
+/* Remove default margins/padding and prevent scrolling */
+/* Remove default margins/padding and prevent scrolling */
 html, body {
+  margin: 0;
+  padding: 0;
   height: 100%;
-  margin: 0;
-}
-
-body {
-  margin: 0;
-  background-image: url('/static/images/cowprint.jpg');
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center center;
-}
-main {
-  display: flex;
-  flex-direction: column;       /* Stack children vertically */
-  justify-content: flex-start;  /* Align children at the top */
-  align-items: center;          /* Center children horizontally */
-  min-height: 100vh;
-  text-align: center;      
-}
-
-#top_navbar {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
   overflow: hidden;
-  background-color: #000000;
+}
+
+/* Set the background image for the body */
+body {
+  background: url('/static/images/cowprint.jpg') no-repeat center center fixed;
+  background-size: cover;
+}
+
+/* Style both navbars */
+header, footer {
   position: fixed;
+  left: 0;
+  right: 0;
+  background-color: #000;
+  color: #fff;
+  z-index: 10; /* ensures navbars appear above the background */
+  display: flex;
+  align-items: center;
+}
+
+/* Top navbar in header */
+header {
   top: 0;
+  height: 50px;  /* adjust as needed */
+}
+
+/* Bottom navbar in footer */
+footer {
+  bottom: 0;
+  height: 50px;  /* adjust as needed */
+}
+
+/* Style the navigation lists */
+#top_navbar,
+#bottom_navbar {
+  list-style: none;
+  margin: 0;
+  padding: 0 20px;
   width: 100%;
   display: flex;
-  justify-content: space-around; /* Adjusts spacing for top navbar items */
+  justify-content: space-around;
 }
 
-#bottom_navbar {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  background-color: #000000;
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  display: flex; /* Make the navbar a flex container */
-  justify-content: center; /* Center the items horizontally */
-  align-items: center; /* Center the items vertically */
-}
-
-li {
-  margin: 0; /* Remove margin to avoid unintended gaps */
-}
-
-li a {
+/* Style the links */
+#top_navbar li a,
+#bottom_navbar li a {
+  color: #fff;
+  text-decoration: none;
+  font-family: sans-serif;
   display: block;
-  color: white;
   text-align: center;
   padding: 14px 16px;
-  text-decoration: none;
 }
 
-li a:hover {
-  background-color: #111;
+/* Hover effect: make the text bold when hovering */
+#top_navbar li a:hover,
+#bottom_navbar li a:hover {
+  font-weight: bold;
 }
-.scroll-box {
-  width: 80%;
-  height: 600px;
-  margin: auto;
+
+/* Position the main content between the fixed header and footer */
+main {
+  position: absolute;
+  top: 50px;     /* height of header */
+  bottom: 50px;  /* height of footer */
+  left: 0;
+  right: 0;
+  overflow: hidden; /* no scrolling within main */
+}
+
+
+/* ///Second part: For the boxes of different routes */
+.box {
+  margin: 10 auto;
   overflow: auto;
   border: 8px solid #000;
   border-radius: 15px;
   background-color: #fff;
 }
-.small-box {
+
+.fixed-box {
   width: 80%;
-  height: 500px;
-  margin: auto;
-  overflow: auto;
-  border: 8px solid #000;
-  border-radius: 15px;
-  background-color: #fff;
+  height: 400px;
 }
-.normal-box {
-  width: 60%;
-  max-width: 800px; /* Optional: Prevents it from getting too wide */
-  min-height: 10px; /* Ensures a small minimum size */
-  padding: 20px; /* Adds spacing inside */
-  margin: auto;
-  overflow: auto; /* Keeps scrolling if content overflows */
-  border: 8px solid #000;
-  border-radius: 15px;
-  background-color: #fff;
-  display: inline-block; /* Allows it to shrink-wrap content */
+
+.flexible-box {
+  width: fit-content; /* Shrinks to content size */
+  max-width: 80%; /* Prevents it from getting too wide */
+  min-height: 10px; /* Ensures it’s not too small */
+  padding: 5px; /* Adds spacing inside */
+  display: inline-block; /* Makes it shrink-wrap content */
 }
+
+
+button {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 5px;
+}
+
+button:focus {
+  outline: none;
+}
+
+
+
