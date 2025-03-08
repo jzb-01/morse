@@ -1,4 +1,4 @@
-import { audioCtx, beep, delay } from './functions.js'
+import { beep, delay } from './functions.js'
 
 let table_name = document.querySelector('h1');
 let right_button = document.getElementById("right");
@@ -49,24 +49,27 @@ left_button.addEventListener('click', function() {
 let playButtons = document.querySelectorAll('table button');
 playButtons.forEach(button => {
 button.addEventListener('click', async function(){
+  document.querySelectorAll("button").forEach(btn => btn.disabled = true);
+  let audioCtx = new (window.AudioContext || window.webkitAudioContext)();
   let morseCode = button.parentElement.previousElementSibling.textContent;
   let time_unit = Number(document.getElementById("time_unit").value);
-  if (audioCtx.state === 'suspended') {
-    audioCtx.resume();
-  }
   for (let x = 0; x < morseCode.length; x++)
   {
     if (morseCode[x] == '.')
       {
-          beep(time_unit);
+          beep(audioCtx, time_unit);
           await delay(time_unit);
       }
       else if (morseCode[x] == '-')
       {
-          beep(time_unit*3);
+          beep(audioCtx, time_unit*3);
           await delay(time_unit*3);
       }
       await delay(time_unit);
   }
-
+  document.querySelectorAll("button").forEach(btn => btn.disabled = false);
+  audioCtx.close();
 })});
+document.getElementById('time_unit').addEventListener('input', function(){
+  document.getElementById('time_unit_value').innerHTML = document.getElementById("time_unit").value;
+});

@@ -1,10 +1,10 @@
 const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 
-function beep(duration) {
-    const oscillator = audioCtx.createOscillator();
+function beep(audio, duration) {
+    const oscillator = audio.createOscillator();
     oscillator.type = 'sine';
-    oscillator.frequency.setValueAtTime(600, audioCtx.currentTime);
-    oscillator.connect(audioCtx.destination);
+    oscillator.frequency.setValueAtTime(600, audio.currentTime);
+    oscillator.connect(audio.destination);
     oscillator.start();
     setTimeout(() => oscillator.stop(), duration);
 }
@@ -13,12 +13,18 @@ function delay(duration) {
     return new Promise(resolve => setTimeout(resolve, duration));
 }
 
-function checkls(element_id, characters, final_list) {
+function checkls(element_id, characters, final_list, display) {
     document.getElementById(element_id).addEventListener('change', function() {
+        if (document.getElementById('alphabet').checked == false && document.getElementById('numbers').checked == false && document.getElementById('special').checked == false)
+        {
+            console.log("hdksjf");
+            this.checked = true;
+            return;
+        }
         if (this.checked) {
             characters.forEach(item => {
                 if (!final_list.includes(item)) {
-                    list.push(item);
+                    final_list.push(item);
                 }
             });
         } else {
@@ -29,7 +35,7 @@ function checkls(element_id, characters, final_list) {
                 }
             });
         }
-        if (!final_list.length == 0)
+        if (final_list.length !== 0)
         {
             for (let x = final_list.length-1; x >= 0; x--)
                 {
@@ -38,8 +44,11 @@ function checkls(element_id, characters, final_list) {
                     final_list[x] = final_list[random];
                     final_list[random] = buffer;
                 }
-            console.log(final_list);
         }
+        display.innerHTML = '';
+        display.innerHTML += final_list[0] + ' ';
+        display.innerHTML += final_list[1] + ' ';
+        console.log(final_list);
     });
 }
 

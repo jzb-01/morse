@@ -77,27 +77,32 @@ main {
   overflow: hidden; /* no scrolling within main */
 }
 
+th, td {
+  padding: 12px 20px; /* Increase padding (top-bottom | left-right) */
+  text-align: center;
+  white-space: nowrap; /* Prevent text from wrapping */
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: auto; /* Allows columns to adjust naturally */
+}
 
 /* ///Second part: For the boxes of different routes */
 .box {
-  margin: 10 auto;
+  background-color: white; /* White background */
+  border: 2px solid black; /* Black border */
+  border-radius: 10%;
+  padding: 20px; /* Space inside the box */
+  margin: 20px; /* Centers it horizontally */
   overflow: auto;
-  border: 8px solid #000;
-  border-radius: 15px;
-  background-color: #fff;
+  scrollbar-width: none;
 }
 
 .fixed-box {
   width: 80%;
   height: 400px;
-}
-
-.flexible-box {
-  width: fit-content; /* Shrinks to content size */
-  max-width: 80%; /* Prevents it from getting too wide */
-  min-height: 10px; /* Ensures it’s not too small */
-  padding: 5px; /* Adds spacing inside */
-  display: inline-block; /* Makes it shrink-wrap content */
 }
 
 

@@ -6,7 +6,7 @@
 <script type="module" src="../static/js/training.js" defer></script>
 {% endblock %}
 {% block main %}
-    <input type="checkbox" id="alphabet" name="alphabet" value="Option 1"> Alphabet<br>
+    <input type="checkbox" id="alphabet" name="alphabet" value="Option 1" checked> Alphabet<br>
     <input type="checkbox" id="numbers" name="numbers" value="Option 2"> Numbers<br>
     <input type="checkbox" id="special" name="special" value="Option 3"> Special Characters<br>
     <input type="range" id="time_unit" min="100" max="1000" value="200" step="50">
@@ -14,7 +14,20 @@
     <div id="visible_ls"></div>
     <input id="user_input">
     <button id="start">Start</button>
-    <button id="stop">Stop</button>
+    <button id="stop" disabled="true">Stop</button>
+    <button id="restart" disabled="true">Restart</button>
     <button id="evaluation" disabled="true">Evaluation</button>
-    <div id="message"></div>
+    <div id="wait" style="display: none;">
+        <p>"Please wait"</p>
+    </div>
+    <div id="report" style="display: none;">
+        <h2 id="result"></h2>
+        <img src="path/to/image.jpg" alt="Happy cow image">
+        <img src="path/to/image.jpg" alt="Sad cow image">
+        <p id="accuracy_report"></p>
+        <button id="continue" disabled="false">Continue</button>
+        <button id="try_again" disabled="false">Try again</button>
+        <button id="quit" disabled="false">Quit</button>
+        <button id="finish" disabled="true">Quit</button>
+    </div>
 {% endblock %}
