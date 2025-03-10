@@ -3,16 +3,27 @@
     Account
 {% endblock %}
 {% block main %}
-<form action="/account" method="post">
-    <input autocomplete="off" autofocus name="email" placeholder="e-mail" type="text">
-    <input autocomplete="off" name="username" placeholder="User Name" type="text">
-    <input autocomplete="off" name="password" placeholder="Password" type="password">
-    <input autocomplete="off" name="confirmation" placeholder="Password again" type="password">
-    <button type="submit" name="register">Register!</button>
-</form>
-<form action="/account" method="post">
-    <input autocomplete="off" name="email-l" placeholder="e-mail" type="text">
-    <input autocomplete="off" name="password-l" placeholder="Password" type="password">
-    <button type="submit" name="login">Log in!</button>
-</form>
+<div style="display: flex; align-items: center; justify-content: center; min-height: 85vh;">
+    <div style="width: 200px; display: flex; flex-direction: column; gap: 20px;">
+        <div class="box" style="width: 200px;">
+            <form action="/account" method="post" style="display: flex; flex-direction: column; gap: 20px;">
+                <input autocomplete="off" autofocus name="email" placeholder="e-mail" type="text">
+                <input autocomplete="off" name="username" placeholder="User Name" type="text">
+                <input autocomplete="off" name="password" placeholder="Password" type="password">
+                <input autocomplete="off" name="confirmation" placeholder="Password again" type="password">
+                <button type="submit" name="register">REGISTER!</button>
+            </form>
+        </div>
+        <div class="box" style="width: 200px;">
+            <form action="/account" method="post" style="display: flex; flex-direction: column; gap: 20px;">
+                <input autocomplete="off" name="email-l" placeholder="e-mail" type="text">
+                <input autocomplete="off" name="password-l" placeholder="Password" type="password">
+                <button type="submit" name="login">LOG IN!</button>
+            </form>
+        </div>
+    </div>
+    <div>
+        <img src="/static/images/cow_1.jpg" alt="Greeting cow" style="width: 400px; height: 440px; border: 2px solid black; border-radius: 10%">
+    </div>
+</div>
 {% endblock %}

@@ -45,8 +45,9 @@ def archives():
         message_id = request.form.get("story_id")
         if not message_id:
             return render_template("failure.html")
-        message = db.execute("SELECT * FROM archives WHERE id = ?", message_id)[0]["story"]
-        return render_template("message.html", message=message)
+        message = db.execute("SELECT story FROM archives WHERE id = ?", message_id)[0]["story"]
+        title = db.execute("SELECT title FROM archives WHERE id = ?", message_id)[0]["title"]
+        return render_template("message.html", message=message, title=title)
     return render_template("archives.html")
 
 @app.route("/notes", methods=["GET", "POST"])

@@ -6,6 +6,11 @@
 <script src="/static/js/translator.js" type="module" defer></script>
 {% endblock %}
 {% block main %}
-<input id="translator_text">
-<input id="translator_morse">
+<div style="display: flex; justify-content: center; align-items: center;">
+    <h1 class="box" style="width: fit-content; padding: 5px; border-radius: 0%;">Translator</h1>
+</div>
+<div style="display: flex; justify-content: center; align-items: center;">
+<textarea id="translator_text" class="box" placeholder="Enter text" style="height: 400px; width: 500px; resize: none; outline: none; "></textarea>
+<textarea id="translator_morse" class="box" placeholder="Enter morse" style="height: 400px; width: 500px; resize: none; outline: none;"></textarea>
+</div>
 {% endblock %}

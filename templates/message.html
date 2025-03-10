@@ -7,10 +7,20 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 {% endblock %}
 {% block main %}
-{{ message }}
+<div style="display: flex; justify-content: center; align-items: center;">
+    <h1 class="box" style="width: fit-content; padding: 5px; border-radius: 0%;">{{ title }}</h1>
+</div>
+<div style="display: flex; align-items: center; justify-content: center; margin: auto;">
+    <div class="box" style="width: 800px; font-size: 24px;">
+        {{ message }}
+    </div>
+</div>
+<div class="box" style="display: flex; align-items: center; gap: 30px; width: fit-content; padding: 10px; margin:auto; margin-top: 20px;  border-radius: 0%;">
 <div id="message" data-message="{{ message }}"></div>
-<button id="boton"><i class="fas fa-play"></i></button>
+<button id="play"><i class="fas fa-play"></i></button>
+<button id="stop" disabled = "true"><i class="fa fa-stop"></i></button>
 <div>time unit</div>
 <input type="range" id="time_unit" min="100" max="1000" value="200" step="50" data-target="time_unit_value">
 <span id="time_unit_value">200</span>
+</div>
 {% endblock %}
