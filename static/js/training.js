@@ -3,6 +3,7 @@ import { dictionary, alphabet, numbers, specialCharacters } from './data.js';
 // Imports from functions.js
 import { audioCtx, beep, delay, checkls } from './functions.js';
 // Variable declarations
+let settings = document.getElementById("settings");
 let time_unit_setting = document.getElementById("time_unit");
 let time_unit = Number(time_unit_setting.value);
 let user_input = document.getElementById("user_input");
@@ -24,6 +25,9 @@ let level = 1;
 let interrupt = false;
 let accuracy = 0;
 
+settings.addEventListener('click', function(){
+    document.getElementById("settings_window").style.display="block";
+});
 
 for (let x = list.length-1; x > 0; x--)
 {

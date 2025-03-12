@@ -6,18 +6,24 @@
 <script type="module" src="../static/js/notes.js" defer></script> 
 {% endblock %}
 {% block main %}
-{% if blackbox %}
-    <div class="box fixed-box">
-        <table>
-            {% for blackbox in blackbox %}
-            <th>user</th>
-            <tr>blackbox.user_id</tr>
-            <th>log</th>
-            <tr>blackbox.log</tr>
-            {% endfor %}
-        </table>
+<div style="display: flex; align-items: center; justify-content: center; margin: auto;">
+    <div class="box" style="background: linear-gradient(to bottom, white 13%, white 13%, black 13%, black 100%);">
+        {% if notes %}
+        <div>
+            <form action="/blackbox" method="post">
+                <select>
+                    {% for log in logs %}
+                    <option value=log.id>log{{ loop.index }}</option>
+                    {% endfor %}
+                </select>
+            </form>
+        </div>   
+        {% else %}
+        <div style="text-align: center;">
+            <p>There arent any logs yet</p>
+        </div>
+        {% endif %}
+        <div id="log_content" style="width: 800px; height: 500px;"> {{ log_content }} </div>
     </div>
-{% else %}
-    <p>There arent any logs yet :)</p>
-{% endif %}
+</div>
 {% endblock %}

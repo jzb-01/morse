@@ -6,13 +6,24 @@
 <script type="module" src="../static/js/notes.js" defer></script> 
 {% endblock %}
 {% block main %}
-{% if notes %}
-    <div class="box fixed-box">
-        {% for note in notes%}
-        <button>note{{ loop.index }}</button>
-        {% endfor %}
+<div style="display: flex; align-items: center; justify-content: center; margin: auto;">
+    <div class="box" style="background: linear-gradient(to bottom, black 13%, black 13%, white 13%, white 100%);">
+        {% if notes %}
+        <div>
+            <form action="/notes" method="post">
+                <select>
+                    {% for note in notes %}
+                    <option value=note.id>note{{ loop.index }}</option>
+                    {% endfor %}
+                </select>
+            </form>
+        </div>   
+        {% else %}
+        <div style="text-align: center; background-color: black;">
+            <p style="color: white;">There arent any notes yet</p>
+        </div>
+        {% endif %}
+        <div id="note_content" style="width: 800px; height: 500px;"> {{ note_content }} </div>
     </div>
-{% else %}
-    <p>There arent any notes yet :)</p>
-{% endif %}
+</div>
 {% endblock %}
