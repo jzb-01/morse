@@ -3,27 +3,27 @@
     Account
 {% endblock %}
 {% block main %}
-<div style="display: flex; align-items: center; justify-content: center; min-height: 85vh; gap: 100px;">
-    <div style="width: 200px; display: flex; flex-direction: column; gap: 20px;">
-        <div class="box" style="width: 200px;">
+<div style="display: flex; gap: 20px;">
+    <div style="width:fit-content; display: flex; flex-direction: column; gap: 20px;">
+        <div class="box" style="width: 200px;  padding: 20px; border-radius: 30px;">
             <form action="/account" method="post" style="display: flex; flex-direction: column; gap: 20px;">
-                <input autocomplete="off" autofocus name="email" placeholder="e-mail" type="text">
-                <input autocomplete="off" name="username" placeholder="User Name" type="text">
-                <input autocomplete="off" name="password" placeholder="Password" type="password">
-                <input autocomplete="off" name="confirmation" placeholder="Password again" type="password">
-                <button type="submit" name="register">REGISTER!</button>
+                <input autocomplete="off" autofocus name="email" placeholder="e-mail" type="text" style="font-size: large;">
+                <input autocomplete="off" name="username" placeholder="User Name" type="text" style="font-size: large;">
+                <input autocomplete="off" name="password" placeholder="Password" type="password" style="font-size: large;">
+                <input autocomplete="off" name="confirmation" placeholder="Password again" type="password" style="font-size: large;">
+                <button id="account_button_register" type="submit" name="register" style="background-color: black; color: white; border-radius: 15px;">Sign Up!</button>
             </form>
         </div>
-        <div class="box" style="width: 200px;">
+        <div class="box" style="width: 200px; padding: 20px; border-radius: 30px;">
             <form action="/account" method="post" style="display: flex; flex-direction: column; gap: 20px;">
-                <input autocomplete="off" name="email-l" placeholder="e-mail" type="text">
-                <input autocomplete="off" name="password-l" placeholder="Password" type="password">
-                <button type="submit" name="login">LOG IN!</button>
+                <input autocomplete="off" name="email-l" placeholder="e-mail" type="text" style="font-size: large;">
+                <input autocomplete="off" name="password-l" placeholder="Password" type="password" style="font-size: large;">
+                <button id="account_button_submit" type="submit" name="login" style="background-color: black; color: white; border-radius: 15px;">Sign In!</button>
             </form>
         </div>
     </div>
     <div>
-        <img src="/static/images/cow_1.jpg" alt="Greeting cow" style="width: 400px; height: 440px; border: 2px solid black; border-radius: 10%">
+        <img src="/static/images/cow_1.jpg" alt="Greeting cow" style="width: 400px; height: 446px; border: 2px solid black; border-radius: 30px">
     </div>
 </div>
 {% endblock %}

@@ -1,14 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="overflow: hidden;">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{% block title %}{% endblock %}</title>
-  <link rel="stylesheet" href="/static/css/styles.css" />
-  {% block js %}{% endblock %}
+  <link rel="stylesheet" href="/static/css/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  {% block js %}
+  {% endblock %}
 </head>
 <body>
-  <header>
+  <header style="top: 0;">
     <nav>
       <ul id="top_navbar">
         <li><a href="/">C.O.W</a></li>
@@ -22,12 +24,12 @@
     </nav>
   </header>
   
-  <main style="position: relative;">
+  <main>
     {% block main %}
     {% endblock %}
   </main>
   
-  <footer>
+  <footer style="bottom: 0;">
     <nav>
       <ul id="bottom_navbar">
         <li><a href="/translator">Translator</a></li>

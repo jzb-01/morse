@@ -4,15 +4,14 @@
 {% endblock %}
 {% block js %}
 <script type="module" src="../static/js/telegraph.js" defer></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 {% endblock %}
 {% block main %}
-<div style="display: flex; justify-content: center; align-items: center;">
-    <h1 class="box" style="width: fit-content; padding: 5px; border-radius: 0%;">Telegraph</h1>
+<div style="position: absolute; display: flex; justify-content: center; top: 0px;">
+    <h1 class="box" style="width: 150px; text-align: center; padding: 5px; border-radius: 10px;">Telegraph</h1>
 </div>
-<div style="display: flex; justify-content: center; align-items: center;">
+<div>
     <form>
-        <textarea id="telegraph_message" name="telegraph_message" class="box" style="height: 350px; width: 700px;" readonly></textarea>
+        <textarea id="telegraph_message" name="telegraph_message" class="box" style="height: 350px; width: 700px; border-radius: 30px;" readonly></textarea>
         {% if session["id"] %}
         <div style="position: absolute; top: 0; right: 35px;">
             <button id="save" name="save" value="save" type="submit"><i class="fa-solid fa-floppy-disk"></i></button>
@@ -21,11 +20,17 @@
         {% endif %}
     </form>
 </div>
-<div style="display: flex; justify-content: center; align-items: center;">
+<div style="position: absolute; justify-content: center; bottom: 5px;">
 <button id="telegraph_button" style="border-radius: 50%; height: 100px; width: 100px; background-color: black; border: 5px; border-style: solid; border-color: black; box-shadow: inset 0 0 0 2px white;"></button>
 </div>
 <button id="clear_button" style="position: absolute; top: 0; left: 0;"><i class="fas fa-times"></i></button>
 <button id="settings" style="position: absolute; top: 0; right: 0;"><i class="fa fa-cog"></i></button>
+
+
+
+
+
+
 
 
 

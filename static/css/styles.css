@@ -1,43 +1,21 @@
-/* ///First part: For the layout/// */
-/* This is for the size and background of the body */
-/* Remove default margins/padding and prevent scrolling */
-/* Remove default margins/padding and prevent scrolling */
-html, body {
 
-  overflow: hidden;
-}
-
-/* Set the background image for the body */
+/* For the layout */
 body {
   background: url('/static/images/cowprint.jpg') no-repeat center center fixed;
   background-size: cover;
 }
 
-/* Style both navbars */
 header, footer {
   position: fixed;
   left: 0;
   right: 0;
   background-color: #000;
-  color: #fff;
-  z-index: 10; /* ensures navbars appear above the background */
   display: flex;
   align-items: center;
+  justify-content: center;
+  height: 50px;
 }
 
-/* Top navbar in header */
-header {
-  top: 0;
-  height: 50px;  /* adjust as needed */
-}
-
-/* Bottom navbar in footer */
-footer {
-  bottom: 0;
-  height: 50px;  /* adjust as needed */
-}
-
-/* Style the navigation lists */
 #top_navbar,
 #bottom_navbar {
   list-style: none;
@@ -48,73 +26,77 @@ footer {
   justify-content: space-around;
 }
 
-/* Style the links */
-#top_navbar li a,
-#bottom_navbar li a {
+a {
   color: #fff;
   text-decoration: none;
   font-family: sans-serif;
-  display: block;
   text-align: center;
-  padding: 14px 16px;
+  padding: 5px 16px;
 }
 
-/* Hover effect: make the text bold when hovering */
-#top_navbar li a:hover,
-#bottom_navbar li a:hover {
+a:hover {
+  background-color: white;
+  color: #000;
+  border-radius: 15px;
+}
+
+#account_button_submit:hover,
+#account_button_register:hover {
   font-weight: bold;
 }
 
-/* Position the main content between the fixed header and footer */
 main {
   position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   top: 50px;     /* height of header */
   bottom: 50px;  /* height of footer */
   left: 0;
   right: 0;
-  overflow: hidden; /* no scrolling within main */
 }
-
+/**/
 th, td {
-  padding: 12px 20px; /* Increase padding (top-bottom | left-right) */
+  padding: 12px 20px; 
   text-align: center;
-  white-space: nowrap; /* Prevent text from wrapping */
 }
 
 table {
   width: 100%;
   border-collapse: collapse;
-  table-layout: auto; /* Allows columns to adjust naturally */
+  table-layout: auto; 
 }
 
 /* ///Second part: For the boxes of different routes */
 .box {
-  background-color: white; /* White background */
-  border: 2px solid black; /* Black border */
-  border-radius: 10%;
-  padding: 20px; /* Space inside the box */
-  margin: 20px; /* Centers it horizontally */
+  background-color: white;
+  border: 2px solid black;
   overflow: auto;
   scrollbar-width: none;
 }
 
-.fixed-box {
-  width: 80%;
-  height: 400px;
+.archive_box {
+  background-color: white;
+  border: 2px solid black;
+  overflow: auto;
+  scrollbar-width: none;
+  width: 200px; 
+  height: 216px;
+  border-radius: 10px; 
+  text-align: center; 
+  padding-left: 10px;
+  padding-right: 10px;
+  background: linear-gradient(to bottom, black 54px, black 54px, white 54px, white 216px);
 }
-
 
 button {
   background: none;
   border: none;
   font-size: 24px;
   cursor: pointer;
-  padding: 5px;
 }
 
-button:focus {
-  outline: none;
-}
+
 
 
 

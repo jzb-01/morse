@@ -6,8 +6,8 @@
 <script type="module" src="../static/js/notes.js" defer></script> 
 {% endblock %}
 {% block main %}
-<div style="display: flex; align-items: center; justify-content: center; margin: auto;">
-    <div class="box" style="background: linear-gradient(to bottom, white 13%, white 13%, black 13%, black 100%);">
+
+    <div class="box" style="background: linear-gradient(to bottom, black 13%, black 13%, white 13%, white 100%); border-radius: 30px;">
         {% if notes %}
         <div>
             <form action="/blackbox" method="post">
@@ -19,11 +19,10 @@
             </form>
         </div>   
         {% else %}
-        <div style="text-align: center;">
-            <p>There arent any logs yet</p>
+        <div  style="text-align: center; background-color: orange; position: relative; top: -15px;">
+            <p style="align-items: center; color: white;">There arent any logs yet</p>
         </div>
         {% endif %}
-        <div id="log_content" style="width: 800px; height: 500px;"> {{ log_content }} </div>
+        <div id="log_content" style="width: 600px; height: 400px;"> {{ log_content }} </div>
     </div>
-</div>
 {% endblock %}

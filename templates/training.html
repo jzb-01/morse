@@ -4,16 +4,14 @@
 {% endblock %}
 {% block js %}
 <script type="module" src="../static/js/training.js" defer></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 {% endblock %}
 {% block main %}
 <button id="settings" style="position: absolute; top: 0; right: 0;"><i class="fa fa-cog"></i></button>
-<div style="display: flex; justify-content: center; align-items: center;">
-    <h1 class="box" style="width: fit-content; padding: 5px; border-radius: 0%;">Training</h1>
+<div style="position: absolute; display: flex; justify-content: center; top: 0px;">
+    <h1 class="box" style="width: 150px; text-align: center; padding: 5px; border-radius: 10px;">Training</h1>
 </div>
-    <div style="display: flex; justify-content: center; align-items: center;">
-        <div class="box" id="visible_ls" style="height: 10px; width: 830px; resize: none; outline: none; border-radius: 0%;"></div>
-    </div>
+<div style="display: flex; flex-direction: column; gap: 15px;">
+    <div class="box" id="visible_ls" style="height: 40px; width: 830px; display: flex; align-items: center;"></div>
     <div style="display: flex; justify-content: center; align-items: center;">
         <button id="start"><i class="fas fa-play" style="font-size: 50px;"></i></button>
         <button id="stop" disabled="true"><i class="fas fa-stop" style="font-size: 50px;"></i></button>
@@ -22,6 +20,7 @@
     </div>
 <div style="display: flex; justify-content: center; align-items: center;">
     <textarea id="user_input" class="box" placeholder="Type what you hear" style="height: 200px; width: 830px; resize: none; outline: none; border-radius: 0%;"></textarea>
+</div>
 </div>
     <div id="wait" style="display: none;">
         <p>"Please wait"</p>

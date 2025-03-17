@@ -31,19 +31,26 @@ def code():
 def translator():
     return render_template("translator.html")
 
+@app.route("/failure")
+def faiilure():
+    return render_template("failure.html")
+
 @app.route("/telegraph")
 def telegraph():
     if request.method == "POST":
-        if request.form.get("save") == "save":
-            note_content = request.form.get("telegraph_message")
-            if not note_content:
-                return render_template("failure.html")
-            db.execute("INSERT INTO note (user_id, note) VALUES(?, ?)", session[id], note_content)
-        elif request.form.get("publish") == "publish":
-            log_content = request.form.get("telegraph_message")
-            if len(log_content) == 0:
-                return render_template("failure.html")
-            db.execute("INSERT INTO note (user_id, log) VALUES(?, ?)", session[id], log_content)
+        if session.get("id"):
+            if request.form.get("save") == "save":
+                note_content = request.form.get("telegraph_message")
+                if not note_content:
+                    return render_template("failure.html")
+                db.execute("INSERT INTO note (user_id, note) VALUES(?, ?)", session[id], note_content)
+            elif request.form.get("publish") == "publish":
+                log_content = request.form.get("telegraph_message")
+                if len(log_content) == 0:
+                    return render_template("failure.html")
+                db.execute("INSERT INTO note (user_id, log) VALUES(?, ?)", session[id], log_content)
+        else:
+            return render_template("failure.html")
     return render_template("telegraph.html")
 
 @app.route("/training")
@@ -63,29 +70,33 @@ def archives():
 
 @app.route("/notes", methods=["GET", "POST"])
 def notes():
-    if session.get("id"):
-        if request.method == "POST":
-            note_id = request.form.get("value")
-            note_content = db.execute ("SELECT note FROM note WHERE id = ?", note_id)[0]["note"]
-            notes = db.execute("SELECT note FROM note WHERE user_id = ?", session["id"])
-            return render_template("notes.html", notes=notes, note_content=note_content)
+    if request.method == "POST":
+        note_id = request.form.get("value")
+        note_content = db.execute ("SELECT note FROM note WHERE id = ?", note_id)[0]["note"]
         notes = db.execute("SELECT note FROM note WHERE user_id = ?", session["id"])
-        return render_template("notes.html", notes=notes)
+        return render_template("notes.html", notes=notes, note_content=note_content)
     else:
-        return render_template("failure.html")
+        if session.get("id"):
+            notes = db.execute("SELECT note FROM note WHERE user_id = ?", session["id"])
+            return render_template("notes.html", notes=notes)
+        else:
+            return render_template("notes.html")
+    
 
 @app.route("/blackbox", methods=["GET", "POST"])
 def blackbox():
-    if session.get("id"):
-        if request.method == "POST":
-            log_id = request.form.get("value")
-            log_content = db.execute ("SELECT log FROM blackbox WHERE id = ?", log_id)[0]["log"]
-            logs = db.execute("SELECT log FROM blackbox")
-            return render_template("notes.html", logs=logs, log_content=log_content)
+
+    if request.method == "POST":
+        log_id = request.form.get("value")
+        log_content = db.execute ("SELECT log FROM blackbox WHERE id = ?", log_id)[0]["log"]
         logs = db.execute("SELECT log FROM blackbox")
-        return render_template("notes.html", logs=logs)
+        return render_template("notes.html", logs=logs, log_content=log_content)
     else:
-        return render_template("failure.html")
+        if (session.get("id")):
+            logs = db.execute("SELECT log FROM blackbox")
+            return render_template("blackbox.html", logs=logs)
+        else:
+            return render_template("blackbox.html")
 
 @app.route("/account", methods=["GET", "POST"])
 def account():
