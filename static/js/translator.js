@@ -11,13 +11,20 @@ text_box.addEventListener("input", function(){
   let morse_translation = "";
   for (let x = 0; x < text_box.value.length; x++)
   {
-    if (dictionary.hasOwnProperty(text_box.value[x].toUpperCase()))
+    if (text_box.value[x] == "\n")
     {
-      morse_translation += dictionary[text_box.value[x].toUpperCase()] + " ";
+      morse_translation += '\n';
     }
     else
     {
-      morse_translation += "#" + " ";
+      if (dictionary.hasOwnProperty(text_box.value[x].toUpperCase()))
+        {
+          morse_translation += dictionary[text_box.value[x].toUpperCase()] + " ";
+        }
+        else
+        {
+          morse_translation += "#" + " ";
+        }
     }
   }
   morse_box.value = morse_translation;
@@ -31,7 +38,7 @@ morse_box.addEventListener("input", function(event){
 
   for (let x = 0; x < morse_box.value.length; x++)
   {
-    if (morse_box.value[x] != " " && morse_box.value[x] != "/")
+    if (morse_box.value[x] != " " && morse_box.value[x] != "/" && morse_box.value[x] != "\n")
     {
       buffer += morse_box.value[x];
     }
@@ -71,6 +78,28 @@ morse_box.addEventListener("input", function(event){
               text_translation += '#';
               buffer = '';
             }
+        }
+      }
+    else if (morse_box.value[x] == '\n')
+      {
+        if (buffer)
+        {
+          if (reverse_dictionary.hasOwnProperty(buffer))
+            {
+              text_translation += reverse_dictionary[buffer];
+              text_translation += '\n'
+              buffer = '';
+            }
+          else
+            {
+              text_translation += '#';
+              text_translation += '\n'
+              buffer = '';
+            }
+        }
+        else
+        {
+          text_translation += '\n';
         }
       }
     if (x == (morse_box.value.length - 1))

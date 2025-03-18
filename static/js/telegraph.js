@@ -1,10 +1,23 @@
 // Settings window display
 document.getElementById('settings').addEventListener('click', function(){
-    document.getElementById('settings_window').style.display = "block"
+    document.getElementById('settings_window').style.visibility = "visible"
 });
 document.getElementById('settings_done').addEventListener('click', function(){
-    document.getElementById('settings_window').style.display = "none"
+    document.getElementById('settings_window').style.visibility = "hidden"
 });
+
+// Function Declaration
+function increase()
+{
+    timer += 1;
+    document.getElementById("timer").innerHTML = timer*10;
+}
+
+// Flag declaration
+let timer_flag = false;
+let timer_check = false;
+let intervalID = null;
+
 // Variable Initialization: time unit and margins percentages
 let time_unit = Number(document.getElementById("time_unit").value);
 let dot_min = (time_unit/100) * Number(document.getElementById("dot_negative_margin").value);
@@ -15,6 +28,7 @@ let letter_min = ((time_unit*3)/100) * Number(document.getElementById("inter-let
 let letter_max = ((time_unit*3)/100) * Number(document.getElementById("inter-letter_space_positive_margin").value);
 let word_min = ((time_unit*7)/100) * Number(document.getElementById("inter-word_space_negative_margin").value);
 let word_max = ((time_unit*7)/100) * Number(document.getElementById("inter-word_space_positive_margin").value);
+let timer = 0;
 // Variables actualization - Time Unit
 document.getElementById('time_unit').addEventListener('input', function(event) {
     document.getElementById('time_unit_value').textContent = event.target.value;
@@ -32,6 +46,7 @@ document.getElementById('time_unit').addEventListener('input', function(event) {
 document.getElementById("dot_negative_margin").addEventListener("input", function(event){
     document.getElementById('dot_min_value').textContent = event.target.value;
     dot_min = (time_unit/100) * Number(document.getElementById("dot_negative_margin").value);
+    console.log(dot_min);
 });
 document.getElementById("dot_positive_margin").addEventListener("input", function(event){
     document.getElementById('dot_max_value').textContent = event.target.value;
@@ -61,54 +76,58 @@ document.getElementById("inter-word_space_positive_margin").addEventListener("in
     document.getElementById('word_max_value').textContent = event.target.value;
     word_max = ((time_unit*7)/100) * Number(document.getElementById("inter-word_space_positive_margin").value);
 });
+
 // Telegraph
 /// Variable declarations
 let start_time = null;
 let end_time = null;
-let timeout;
 let message = document.getElementById("telegraph_message");
 let button = document.getElementById("telegraph_button");
 let clear = document.getElementById("clear_button");
+let other_timer;
 /// Telegraph function
-button.addEventListener("mousedown", function() {
-    //// Time limit
-    timeout = setTimeout(function() {
-        start_time = null;
-        end_time = null;
-        return
-    }, 5000);
-    //// Space insert
-    start_time = new Date();
-    if (end_time)
+document.addEventListener("keydown", function(event) {
+    if (event.key == " ")
     {
-        let space_duration = start_time - end_time;
-        if ((time_unit*3)-letter_min <= space_duration && space_duration <= (time_unit*3)+letter_max)
+        if (timer_flag == false)
         {
-            message.textContent += " ";
+            setInterval(increase, 10);
+            timer_flag = true;
         }
-        else if ((time_unit*7)-word_min <= space_duration && space_duration <= (time_unit*7)+word_max)
+        if (timer_check == false)
         {
-            message.textContent += " / ";
+            other_timer = timer;
+            timer = 0;
+            if (((time_unit*3)-letter_min) <= other_timer <= ((time_unit*3)+letter_max))
+            {
+                message.textContent += " ";
+            }
+            else if (((time_unit*7)-word_min) <= other_timer <= ((time_unit*7)+word_max))
+            {
+                message.textContent += " / ";
+            }
+            timer_check = true;
         }
     }
 });
-button.addEventListener("mouseup", function() {
-    if (!start_time)
+document.addEventListener("keyup", function(event) {
+    if (event.key == " ")
     {
-        return;
-    }
-    clearTimeout(timeout);
-    end_time = new Date();
-    let duration = end_time - start_time;
-    if (time_unit-dot_min <= duration && duration <= time_unit+dot_max)
-    {
-        message.textContent += ".";
-    }
-    else if ((time_unit*3)-dash_min <= duration && duration <= (time_unit*3)+dash_max)
-    {
-        message.textContent += "-";
+        other_timer = timer;
+        timer = 0;
+        if ((time_unit-dot_min) <= other_timer <= (time_unit+dot_max))
+        {
+            message.textContent += ".";
+        }
+        else if (((time_unit*3)-dash_min) <= other_timer <= ((time_unit*3)+dash_max))
+        {
+            message.textContent += "-";
+        }
+        timer_check = false;
     }
 });
+// Clear the code
 clear.addEventListener('click', function(){
     message.textContent = '';
 })
+
