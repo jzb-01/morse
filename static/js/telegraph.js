@@ -6,12 +6,13 @@ document.getElementById('settings_done').addEventListener('click', function(){
     document.getElementById('settings_window').style.visibility = "hidden"
 });
 
-// Function Declaration
-function increase()
-{
-    timer += 1;
-    document.getElementById("timer").innerHTML = timer*10;
-}
+document.getElementById('info').addEventListener('click', function(){
+    document.getElementById('info_window').style.display = "block"
+});
+document.getElementById('info_done').addEventListener('click', function(){
+    document.getElementById('info_window').style.display = "none"
+});
+
 
 // Flag declaration
 let timer_flag = false;
@@ -85,26 +86,46 @@ let message = document.getElementById("telegraph_message");
 let button = document.getElementById("telegraph_button");
 let clear = document.getElementById("clear_button");
 let other_timer;
+
+// Function Declaration
+function increase()
+{
+    if (timer > time_unit*1.5)
+    {
+        clearInterval(intervalID);
+        document.getElementById("timer").innerHTML = 0;
+        timer_flag = false;
+    }
+    else
+    {
+        timer += 1;
+        document.getElementById("timer").innerHTML = timer*10;
+    }
+}
+
 /// Telegraph function
 document.addEventListener("keydown", function(event) {
     if (event.key == " ")
     {
         if (timer_flag == false)
         {
-            setInterval(increase, 10);
+            intervalID = setInterval(increase, 10);
             timer_flag = true;
         }
         if (timer_check == false)
         {
-            other_timer = timer;
+            if(timer != 0)
+            {
+                other_timer = timer;
             timer = 0;
-            if (((time_unit*3)-letter_min) <= other_timer <= ((time_unit*3)+letter_max))
+            if (((time_unit * 3) - letter_min) <= other_timer * 10 && other_timer * 10 <= ((time_unit * 3) + letter_max))
             {
                 message.textContent += " ";
             }
-            else if (((time_unit*7)-word_min) <= other_timer <= ((time_unit*7)+word_max))
+            else if (((time_unit * 7) - word_min) <= other_timer * 10 && other_timer * 10 <= ((time_unit * 7) + word_max))
             {
                 message.textContent += " / ";
+            }
             }
             timer_check = true;
         }
@@ -113,15 +134,18 @@ document.addEventListener("keydown", function(event) {
 document.addEventListener("keyup", function(event) {
     if (event.key == " ")
     {
-        other_timer = timer;
+        if (timer != 0)
+        {
+            other_timer = timer;
         timer = 0;
-        if ((time_unit-dot_min) <= other_timer <= (time_unit+dot_max))
+        if ((time_unit - dot_min) <= other_timer * 10 && other_timer * 10 <= (time_unit + dot_max))
         {
             message.textContent += ".";
         }
-        else if (((time_unit*3)-dash_min) <= other_timer <= ((time_unit*3)+dash_max))
+        else if (((time_unit * 3) - dash_min) <= other_timer * 10 && other_timer * 10 <= ((time_unit * 3) + dash_max))
         {
             message.textContent += "-";
+        }
         }
         timer_check = false;
     }
@@ -129,5 +153,9 @@ document.addEventListener("keyup", function(event) {
 // Clear the code
 clear.addEventListener('click', function(){
     message.textContent = '';
+    clearInterval(intervalID);
+    timer_flag = false;
+    timer = 0;
+    document.getElementById("timer").innerHTML = 0;
 })
 

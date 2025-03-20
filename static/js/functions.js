@@ -1,5 +1,3 @@
-const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-
 function beep(audio, duration) {
     const oscillator = audio.createOscillator();
     oscillator.type = 'sine';
@@ -52,4 +50,4 @@ function checkls(element_id, characters, final_list, display) {
     });
 }
 
-export { audioCtx, beep, delay, checkls };
+export { beep, delay, checkls };

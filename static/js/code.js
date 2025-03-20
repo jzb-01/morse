@@ -6,6 +6,9 @@ let left_button = document.getElementById("left");
 let table_1 = document.getElementById('table_1');
 let table_2 = document.getElementById('table_2');
 let table_3 = document.getElementById('table_3');
+let playButtons = document.querySelectorAll('table button');
+let audioCtx = null;
+
 right_button.addEventListener('click', function() {
   if (table_1.style.display === "table")
   {
@@ -46,11 +49,16 @@ left_button.addEventListener('click', function() {
       table_2.style.display = "table";
     }
 });
-let playButtons = document.querySelectorAll('table button');
+
+
+
 playButtons.forEach(button => {
 button.addEventListener('click', async function(){
   document.querySelectorAll("button").forEach(btn => btn.disabled = true);
-  let audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  if (audioCtx == null)
+  {
+    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  }
   let morseCode = button.parentElement.previousElementSibling.textContent;
   let time_unit = Number(document.getElementById("time_unit").value);
   for (let x = 0; x < morseCode.length; x++)
@@ -68,8 +76,8 @@ button.addEventListener('click', async function(){
       await delay(time_unit);
   }
   document.querySelectorAll("button").forEach(btn => btn.disabled = false);
-  audioCtx.close();
 })});
+
 document.getElementById('time_unit').addEventListener('input', function(){
   document.getElementById('time_unit_value').innerHTML = document.getElementById("time_unit").value;
 });

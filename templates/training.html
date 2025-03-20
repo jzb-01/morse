@@ -6,7 +6,8 @@
 <script type="module" src="../static/js/training.js" defer></script>
 {% endblock %}
 {% block main %}
-<button id="settings" style="position: absolute; top: 0; right: 0;"><i class="fa fa-cog"></i></button>
+<button id="settings" style="position: absolute; top: 0; right: 5px;"><i class="fa fa-cog"></i></button>
+<button id="info" style="position: absolute; top: 5px; right: 35px;"><i class="fa fa-info-circle"></i></button>
 <div style="position: absolute; display: flex; justify-content: center; top: 0px;">
     <h1 class="box" style="width: 150px; text-align: center; padding: 5px; border-radius: 10px;">Training</h1>
 </div>
@@ -22,31 +23,72 @@
     <textarea id="user_input" class="box" placeholder="Type what you hear" style="height: 200px; width: 850px; resize: none; outline: none; border-radius: 0%; padding: 10px; font-size: 30px;"></textarea>
 </div>
 </div>
-    <div id="wait" style="display: none;">
-        <p>"Please wait"</p>
+
+
+
+<div id="info_window" style="display: none;">
+    <div style="display: flex; align-items: center; justify-content: center; height: 100%; width: 100%; background-color: #000; position: absolute; top: 0; bottom: 0; right: 0; left: 0;">
+        <div class="box" style="border-radius: 30px; width: 720px; height: 500px; padding: 10px;">
+            <h1>Welcome to the Training Module!</h1>
+            <p>In this module, you'll practice decoding Morse code by listening to a series of audio beeps. Here's how it works:</p>
+            <p>Here’s how it works:</p>
+            <ul>
+                <li><p><b>Initiate: </b>Press the play button to begin the training. You'll hear a sequence of Morse signals for random characters from your selected lists (alphabet, numbers, and/or special characters).</p></li>
+                <li><p><b>Interacting with the module: </b>Use the stop button to interrupt the training, and the restart button to try again. When you're ready, click evaluation to check your accuracy.</p></li>
+                <li><p><b>Settings: </b>Click the gear icon in the top right to open settings. Here, you can select which types of characters to include and adjust the time unit (which sets the duration of a dot). This time unit also determines the length of dashes and spaces (three time units for dashes and inter-character gaps, seven for word gaps).</p></li>
+                <li><p><b>Accuracy Report: </b>After evaluation, you'll see a report displaying your accuracy. Based on your performance, you can choose to continue, try again, quit, or finish the session if you reached the end of the list.</p></li>
+            </ul>
+            <p>Enjoy honing your Morse code skills by listening, decoding, and testing your knowledge—all within this interactive training session!</p>
+        </div>
+        <button id="info_done" style="position: absolute; top: 5px; right: 0;"><i class="fa fa-cog" style="color: white;"></i></button>
     </div>
-    <div id="report" style="display: none;">
-        <h2 id="result"></h2>
-        <img src="path/to/image.jpg" alt="Happy cow image">
-        <img src="path/to/image.jpg" alt="Sad cow image">
-        <p id="accuracy_report"></p>
-        <button id="continue" disabled="false">Continue</button>
-        <button id="try_again" disabled="false">Try again</button>
-        <button id="quit" disabled="false">Quit</button>
-        <button id="finish" disabled="true">Quit</button>
     </div>
 
-    <div id="settings_window" style="display: none; height: 100%; width: 100%; background-color: #000; position: absolute; top: 0; bottom: 0; right: 0; left: 0;">
-        <div class="box" style="display: flex; align-items: center; justify-content: center; gap: 30px; width: 400px; padding: 10px; margin:auto; margin-top: 20px;  border-radius: 0%;">
-            <div><b>Time unit</b></div>
-            <input type="range" id="time_unit" min="100" max="1000" value="200" step="50">
-            <span id="time_unit_value">200</span>
+
+<div id="wait" style="display: none;">
+<div style="display: flex; align-items: center; justify-content: center; background-color: #000; position: absolute; top: 0; bottom: 0; right: 0; left: 0;">
+    <p class="box" style="font-size: 50px; border-radius: 30px; padding: 10px;">Please wait...</p>
+</div>
+</div>
+
+
+
+<div id="report" style="visibility: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; background-color: #000; position: absolute; top: 0; bottom: 0; right: 0; left: 0; gap: 15px;">
+    <div class="box" style="display: flex; flex-direction: column; align-items: center; justify-content: center; border-radius: 30px; width: 700px; padding: 10px;">
+        <div style="height: 55; display: flex; justify-content: center; align-items: center;">
+            <h1 style="font-size: 55px; margin: 0;">Report</h1>
         </div>
-        <div class="box" style="display: flex; align-items: center; justify-content: center; gap: 30px; width: 400px; padding: 10px; margin:auto; margin-top: 20px; border-radius: 0%; width: 200px; display: flex; flex-direction: column; gap: 20px;">
+        <img src="path/to/image.jpg" alt="Happy cow image" style="display: none;">
+        <img src="path/to/image.jpg" alt="Sad cow image" style="display: none;">
+        <div style="display: flex; justify-content: center; align-items: center;">
+        <p style="font-size: 40px; text-align: center;" id="accuracy_report"></p>
+        </div>
+    </div>
+
+    <div style="display: flex; align-items: center; justify-content: center;">
+        <button id="continue" class="box" style="display: none; width: 150px; height: 60px; border-radius: 30px;">Continue</button>
+        <button id="try_again" class="box" style="display: none; width: 150px; height: 60px; border-radius: 30px;">Try again</button>
+        <button id="quit" class="box" style="display: none; width: 150px; height: 60px; border-radius: 30px;">Quit</button>
+        <button id="finish" class="box" style="display: none; width: 150px; height: 60px; border-radius: 30px;">Finish</button>
+    </div>
+</div>
+
+
+
+<div id="settings_window" style="display: none;">
+<div style="display: flex; flex-direction: column; align-items: center; justify-content: center; background-color: black; position: absolute; top: 0; bottom: 0; right: 0; left: 0; gap: 15px;">
+
+    <div class="box" style="display: flex; align-items: center; justify-content: center; gap: 30px; padding: 10px; border-radius: 30px; width: 200px; flex-direction: column;">
         <input type="checkbox" id="alphabet" name="alphabet" value="Option 1" checked> Alphabet<br>
         <input type="checkbox" id="numbers" name="numbers" value="Option 2"> Numbers<br>
         <input type="checkbox" id="special" name="special" value="Option 3"> Special Characters<br>
     </div>
-        <button id="settings_done" style="position: absolute; top: 0; right: 0;"><i class="fa fa-cog" style="color: white;"></i></button>
+    <div class="settings_box">
+        <div>time unit</div>
+        <input type="range" id="time_unit" min="100" max="1000" value="200" step="50">
+        <span id="time_unit_value">200</span>
     </div>
+    <button id="settings_done" style="position: absolute; top: 0; right: 0;"><i class="fa fa-cog" style="color: white;"></i></button>
+</div>
+</div>
 {% endblock %}
