@@ -10,7 +10,7 @@
     <h1 class="box" style="width: 150px; text-align: center; padding: 5px; border-radius: 10px;">Telegraph</h1>
 </div>
 <div>
-    <form>
+    <form action="/telegraph" method="post">
         <textarea id="telegraph_message" name="telegraph_message" class="box" style="height: 330px; width: 680px; border-radius: 30px; resize: none; outline: none; padding: 10px; font-size: large;" readonly></textarea>
         {% if session["id"] %}
         <div style="position: absolute; top: 0; right: 35px;">

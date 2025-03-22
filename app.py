@@ -50,13 +50,18 @@ def archives():
 def notes():
     if request.method == "POST":
         note_id = request.form.get("selection")
-        note_content = db.execute("SELECT note FROM note WHERE id = ?", note_id)[0]["note"]
-        notes = db.execute("SELECT note FROM note WHERE user_id = ?", session["id"])
+        note_contents = db.execute("SELECT note FROM note WHERE id = ?", note_id)
+        if note_contents:
+            note_content = note_contents[0]["note"]
+        else:
+            alert = "Select an existent note!"
+            return render_template("failure.html", alert=alert)
+        notes = db.execute("SELECT * FROM note WHERE user_id = ?", session["id"])
         return render_template("notes.html", notes=notes, note_content=note_content)
     else:
         if session.get("id"):
-            notes = db.execute("SELECT note FROM note WHERE user_id = ?", session["id"])
-            return render_template("notes.html", notes=notes)
+            notes = db.execute("SELECT * FROM note WHERE user_id = ?", session["id"])
+            return render_template("notes.html", notes=notes, note_content="")
         else:
             alert = "You must be logged to use this module"
             return render_template("failure.html", alert = alert)
@@ -66,19 +71,22 @@ def blackbox():
 
     if request.method == "POST":
         log_id = request.form.get("selection")
-        log_content = db.execute ("SELECT log FROM blackbox WHERE id = ?", log_id)[0]["log"]
-        logs = db.execute("SELECT log FROM blackbox")
-        return render_template("notes.html", logs=logs, log_content=log_content)
+        log_contents = db.execute ("SELECT log FROM blackbox WHERE id = ?", log_id)
+        if log_contents:
+            log_content = log_contents[0]["log"]
+        else:
+            alert = "Select an existent log!"
+            return render_template("failure.html", alert=alert)
+        logs = db.execute("SELECT * FROM blackbox")
+        return render_template("blackbox.html", logs=logs, log_content=log_content)
     else:
         if session.get("id"):
-            logs = db.execute("SELECT log FROM blackbox")
+            logs = db.execute("SELECT * FROM blackbox")
             return render_template("blackbox.html", logs=logs)
         else:
             alert = "You must be logged to use this module"
             return render_template("failure.html", alert = alert)
         
-
-# ----------------------------------------------------------------------------------------------
         
 
 
@@ -111,6 +119,10 @@ def account():
             db.execute("INSERT INTO Register (username, password, email) VALUES(?, ?, ?)", username, hashed_password, email)
             session["id"] = db.execute("SELECT id FROM Register WHERE username = ?", username)[0]["id"]
             return redirect("/")
+        
+        elif "log_out" in request.form:
+            session.clear()
+            return redirect("/")
             
         elif "login" in request.form:
             email = request.form.get("email-l")
@@ -138,41 +150,26 @@ def account():
         else:
             return render_template("account.html")
 
-
-
-
-
-
-
-
-
-
-
-
 @app.route("/translator")
 def translator():
     return render_template("translator.html")
 
-@app.route("/failure")
-def faiilure():
-    return render_template("failure.html")
-
-@app.route("/telegraph")
+@app.route("/telegraph", methods=["GET", "POST"])
 def telegraph():
     if request.method == "POST":
         if session.get("id"):
-            if request.form.get("save") == "save":
+            if request.form.get("save"):
                 note_content = request.form.get("telegraph_message")
                 if len(note_content) == 0:
                     alert = "No message was detected"
                     return render_template("failure.html", alert=alert)
-                db.execute("INSERT INTO note (user_id, note) VALUES(?, ?)", session[id], note_content)
-            elif request.form.get("publish") == "publish":
+                db.execute("INSERT INTO note (user_id, note) VALUES(?, ?)", session["id"], note_content)
+            elif request.form.get("publish"):
                 log_content = request.form.get("telegraph_message")
                 if len(log_content) == 0:
                     alert = "No message was detected"
                     return render_template("failure.html", alert=alert)
-                db.execute("INSERT INTO blackbox (user_id, log) VALUES(?, ?)", session[id], log_content)
+                db.execute("INSERT INTO blackbox (user_id, log) VALUES(?, ?)", session["id"], log_content)
         else:
             alert = "You must be logged to use this module"
             return render_template("failure.html", alert = alert)
@@ -182,6 +179,9 @@ def telegraph():
 def training():
     return render_template("training.html")
 
+@app.route("/failure")
+def faiilure():
+    return render_template("failure.html")
 
 
 if __name__ == '__main__':
