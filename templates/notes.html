@@ -10,9 +10,10 @@
         {% if notes %}
         <div>
             <form action="/notes" method="post">
-                <select>
+                <select name="selection">
+                    <option value="" disabled selected>Select</option>
                     {% for note in notes %}
-                    <option value=note.id>note{{ loop.index }}</option>
+                    <option value="{{ note.id }}">note {{ loop.index }}</option>
                     {% endfor %}
                 </select>
             </form>

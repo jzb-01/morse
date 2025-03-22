@@ -11,9 +11,10 @@
         {% if notes %}
         <div>
             <form action="/blackbox" method="post">
-                <select>
+                <select name="selection">
+                    <option value="" disabled selected>Select</option>
                     {% for log in logs %}
-                    <option value=log.id>log{{ loop.index }}</option>
+                    <option value="{{ log.id }}">log {{ loop.index }}</option>
                     {% endfor %}
                 </select>
             </form>
