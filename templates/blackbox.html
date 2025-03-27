@@ -1,29 +1,71 @@
 {% extends "layout.html" %}
-{% block title %}
-    Blackbox
-{% endblock %}
+{% block title %}Blackbox{% endblock %}
+
 {% block js %}
 <script type="module" src="../static/js/blackbox.js" defer></script>
 {% endblock %}
+
 {% block main %}
-    <div class="box" style="background: linear-gradient(to bottom, white 60px, white 60px, black 60px, black 460%); border-radius: 30px;">
+<!-- Main container: centers content and applies vertical spacing -->
+<div style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px;">
+    
+    <!-- Main notes box with a gradient background and rounded corners -->
+    <div class="box" style="background: linear-gradient(to bottom, white 60px, white 60px, black 60px, black 370px); border-radius: 30px;">
+        
         {% if logs %}
-        <div>
-            <form action="/blackbox" method="post">
-                <select id="blackbox_select" name="selection">
-                    <option value="" disabled selected>Select</option>
+        <!-- If there are notes, display the selection form -->
+        <div style="height: 60px; padding: 0%; margin: 0%;">
+            <form action="/blackbox" method="post" style="display: flex; align-items: center; justify-content: center; height: 60px; gap: 100px;">
+                
+                <!-- Dropdown select for notes -->
+                <select id="blackbox_select" name="selection" style="border-radius: 30px; font-size: larger;">
+                    <option value="" disabled selected>select</option>
                     {% for log in logs %}
                     <option value="{{ log.id }}">log {{ loop.index }}</option>
                     {% endfor %}
                 </select>
-                <button id="blackbox_button" type="submit" style="background-color: white;">send</button>
+                
+                <!-- Title for the notes section -->
+                <b style="font-size: 40px;">Logs</b>
+                
+                <!-- Submit button (initially disabled) -->
+                <button id="blackbox_button" type="submit" disabled style="border: 1px solid black; border-radius: 30px; font-size: larger;">send</button>
             </form>
-        </div>   
+        </div>
         {% else %}
+        <!-- If there are no notes, show a message -->
         <div style="height: 60px; display: flex; justify-content: center; align-items: center;">
             <p style="font-size: large;">There arent any logs yet</p>
         </div>
         {% endif %}
-        <div id="log_content" style="width: 600px; height: 400px;"> {{ log_content }} </div>
+        
+        <!-- Display area for note content -->
+        <div style="width: 600px; height: 300px; padding: 15px; font-size: larger; color: white;">
+            {% if log_content %}
+            <!-- Show note creation time and content -->
+            {{ log_author }} on {{ log_creation }} <br> <b id="log_content">&gt; {{ log_content }}</b> 
+            {% endif %}
+        </div>
+        
+        <!-- Control buttons for audio playback (play, stop, restart) -->
+        <div style="display: flex; align-items: center; justify-content: center; height: 60px;">
+            <button id="play_button" disabled>
+                <i class="fas fa-play" style="font-size: 40px;"></i>
+            </button>
+            <button id="stop_button" disabled>
+                <i class="fas fa-stop" style="font-size: 40px;"></i>
+            </button>
+            <button id="restart_button" disabled>
+                <i class="fas fa-redo" style="font-size: 40px;"></i>
+            </button>
+        </div>
     </div>
+    
+    <!-- Settings box for adjusting the time unit -->
+    <div class="settings_box">
+        <div>time unit</div>
+        <input type="range" id="time_unit_settings" min="100" max="1000" value="200" step="50">
+        <span id="time_unit_value">200</span>
+    </div>
+</div>
 {% endblock %}

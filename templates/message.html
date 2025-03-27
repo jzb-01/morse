@@ -1,26 +1,45 @@
 {% extends "layout.html" %}
-{% block title %}
-    Account
-{% endblock %}
-{% block js %}
-<script type="module" src="../static/js/message.js" defer></script> 
-{% endblock %}
-{% block main %}
-<div style="position: absolute; display: flex; justify-content: center; top: 0px;">
-    <h1 class="box" style="width: fit-content; padding: 5px; border-radius: 10px;">{{ title }}</h1>
-</div>
-    <div class="box" style="width: 800px; height: 300px; font-size: 24px; border-radius: 30px; padding: 15px;">
-        {{ message }}
-    </div>
+{% block title %}Message{% endblock %}
 
-<div style="position: absolute; display: flex; justify-content: center; bottom: 20px;">
-<div class="box" style="display: flex; align-items: center; gap: 20px; width: 400px; padding: 10px; margin:auto; margin-top: 20px; border-radius: 10px;">
-<div id="message" data-message="{{ message }}"></div>
-<button id="play"><i class="fas fa-play"></i></button>
-<button id="stop" disabled = "true"><i class="fa fa-stop"></i></button>
-<div><b>Time unit</b></div>
-<input type="range" id="time_unit" min="100" max="1000" value="200" step="50" data-target="time_unit_value">
-<b id="time_unit_value">200</b>
-</div>
-</div>
+{% block js %}
+  <!-- JavaScript Block -->
+  <script type="module" src="../static/js/message.js" defer></script>
+{% endblock %}
+
+{% block main %}
+  <!-- Main Content Block -->
+
+  <!-- Header Section -->
+  <div style="position: absolute; display: flex; justify-content: center; top: 0px;">
+    <h1 class="box" style="width: fit-content; padding: 5px; border-radius: 10px;">
+      {{ title }}
+    </h1>
+  </div>
+
+  <!-- Message Display Section -->
+  <div id="message" class="box" style="width: 800px; height: 300px; font-size: 24px; border-radius: 30px; padding: 15px;">
+    {{ message }}
+  </div>
+
+  <!-- Controls Section -->
+  <div style="position: absolute; display: flex; justify-content: center; bottom: 20px;">
+    <div class="box" style="display: flex; align-items: center; gap: 20px; width: 400px; padding: 10px; margin:auto; margin-top: 20px; border-radius: 10px;">
+      <!-- Play Button -->
+      <button id="play">
+        <i class="fas fa-play"></i>
+      </button>
+      <!-- Stop Button -->
+      <button id="stop" disabled="true">
+        <i class="fa fa-stop"></i>
+      </button>
+      <!-- Time Unit Label -->
+      <div>
+        <b>Time unit</b>
+      </div>
+      <!-- Time Unit Slider -->
+      <input type="range" id="time_unit" min="100" max="1000" value="200" step="50">
+      <!-- Display for Time Unit Value -->
+      <b id="time_unit_value">200</b>
+    </div>
+  </div>
 {% endblock %}

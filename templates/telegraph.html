@@ -1,121 +1,174 @@
 {% extends "layout.html" %}
-{% block title %}
-    Telegraph
-{% endblock %}
+{% block title %}Telegraph{% endblock %}
+
 {% block js %}
-<script type="module" src="../static/js/telegraph.js" defer></script>
+    <!-- JavaScript module for Telegraph functionality -->
+    <script type="module" src="../static/js/telegraph.js" defer></script>
 {% endblock %}
+
 {% block main %}
-<div style="position: absolute; display: flex; justify-content: center; top: 0px;">
-    <h1 class="box" style="width: 150px; text-align: center; padding: 5px; border-radius: 10px;">Telegraph</h1>
-</div>
-<div>
-    <form action="/telegraph" method="post">
-        <textarea id="telegraph_message" name="telegraph_message" class="box" style="height: 330px; width: 680px; border-radius: 30px; resize: none; outline: none; padding: 10px; font-size: large;" readonly></textarea>
-        {% if session["id"] %}
-        <div style="position: absolute; top: 0; right: 35px;">
-            <button name="save" value="save" type="submit"><i class="fa-solid fa-floppy-disk"></i></button>
-            <button name="publish" value="publish" type="submit"><i class="fa-solid fa-bullhorn"></i></button>
+    <!-- Title at the top of the page -->
+    <div style="position: absolute; display: flex; justify-content: center; top: 0px;">
+        <h1 class="box" style="width: 150px; text-align: center; padding: 5px; border-radius: 10px;">
+            Telegraph
+        </h1>
+    </div>
+
+    <!-- Main form containing the telegraph message textarea -->
+    <div>
+        <form action="/telegraph" method="post">
+            <!-- Readonly textarea displaying the telegraph message -->
+            <textarea id="telegraph_message" name="telegraph_message" class="box" 
+                style="height: 330px; width: 680px; border-radius: 30px; resize: none; outline: none; padding: 10px; font-size: large;" 
+                readonly>
+            </textarea>
+            {% if session["id"] %}
+            <!-- Save and publish buttons, visible only if user is logged in -->
+            <div style="position: absolute; top: 0; right: 35px;">
+                <button name="save" value="save" type="submit">
+                    <i class="fa-solid fa-floppy-disk"></i>
+                </button>
+                <button name="publish" value="publish" type="submit">
+                    <i class="fa-solid fa-bullhorn"></i>
+                </button>
+            </div>
+            {% endif %}
+        </form>
+    </div>
+
+    <!-- Telegraph button at the bottom center -->
+    <div style="position: absolute; justify-content: center; bottom: 5px;">
+        <button id="telegraph_button" 
+            style="border-radius: 50%; height: 100px; width: 100px; background-color: black; border: 5px solid black; box-shadow: inset 0 0 0 2px white;">
+        </button>
+    </div>
+
+    <!-- Info button; position changes based on session status -->
+    {% if session["id"] %}
+    <button id="info" style="position: absolute; top: 5px; right: 100px;">
+        <i class="fa fa-info-circle"></i>
+    </button>
+    {% else %}
+    <button id="info" style="position: absolute; top: 5px; right: 35px;">
+        <i class="fa fa-info-circle"></i>
+    </button>
+    {% endif %}
+
+    <!-- Clear and settings buttons -->
+    <button id="clear_button" style="position: absolute; top: 5px; left: 0;">
+        <i class="fas fa-times"></i>
+    </button>
+    <button id="settings" style="position: absolute; top: 5px; right: 0;">
+        <i class="fa fa-cog"></i>
+    </button>
+
+    <!-- Timer display in the bottom right corner -->
+    <b id="timer" style="position: absolute; bottom: 5px; right: 5px; color: red;">0</b>
+
+    <!-- Information window (hidden by default) -->
+    <div id="info_window" style="display: none;">
+        <div style="display: flex; align-items: center; justify-content: center; height: 100%; width: 100%; background-color: #000; position: absolute; top: 0; bottom: 0; right: 0; left: 0;">
+            <div class="box" style="border-radius: 30px; width: 720px; height: 500px; padding: 10px;">
+                <h1>Welcome to the Telegraph!</h1>
+                <p>This virtual tool lets you write messages using the classic dot-and-dash system of Morse code. Just press and release the spacebar to create signals!</p>
+                <p>Here’s how it works:</p>
+                <ul>
+                    <li>
+                        <p><b>Timer: </b>In the bottom right corner, a timer tracks how long you press the spacebar (and how long you pause) to help you time your signals.</p>
+                    </li>
+                    <li>
+                        <p><b>Clearing Messages: </b>Click the X in the top left to clear your current message.</p>
+                    </li>
+                    <li>
+                        <p><b>Settings: </b>Adjust your experience using the gear icon in the top right. You can set the time unit (in milliseconds) for a dot. A dash is three time units, spaces between characters are three time units, and spaces between words are seven time units.</p>
+                    </li>
+                    <li>
+                        <p><b>Timing Flexibility: </b>You can customize the margin of error for dots, dashes, and spaces to make sending messages easier.</p>
+                    </li>
+                </ul>
+                <p>Additional Features (when logged in):</p>
+                <ul>
+                    <li>
+                        <p>Click the cassette icon to save your telegraph message to your notes.</p>
+                    </li>
+                    <li>
+                        <p>Click the plane icon to publish your message to the blackbox and share it with others.</p>
+                    </li>
+                </ul>
+                <p>Give it a try and enjoy communicating like a 19th-century telegraph operator!</p>
+            </div>
+            <!-- Button to close the info window -->
+            <button id="info_done" style="position: absolute; top: 5px; right: 0;">
+                <i class="fa fa-cog" style="color: white;"></i>
+            </button>
         </div>
-        {% endif %}
-    </form>
-</div>
-<div style="position: absolute; justify-content: center; bottom: 5px;">
-<button id="telegraph_button" style="border-radius: 50%; height: 100px; width: 100px; background-color: black; border: 5px; border-style: solid; border-color: black; box-shadow: inset 0 0 0 2px white;"></button>
-</div>
-{% if session["id"] %}
-<button id="info" style="position: absolute; top: 5px; right: 100px;"><i class="fa fa-info-circle"></i></button>
-{% else %}
-<button id="info" style="position: absolute; top: 5px; right: 35px;"><i class="fa fa-info-circle"></i></button>
-{% endif %}
-
-<button id="clear_button" style="position: absolute; top: 5px; left: 0;"><i class="fas fa-times"></i></button>
-<button id="settings" style="position: absolute; top: 5px; right: 0;"><i class="fa fa-cog"></i></button>
-<span id="timer" style="position: absolute; bottom: 5px; right: 5px;">0</span>
-
-
-
-
-<div id="info_window" style="display: none;">
-<div style="display: flex; align-items: center; justify-content: center; height: 100%; width: 100%; background-color: #000; position: absolute; top: 0; bottom: 0; right: 0; left: 0;">
-    <div class="box" style="border-radius: 30px; width: 720px; height: 500px; padding: 10px;">
-        <h1>Welcome to the Telegraph!</h1>
-        <p>This virtual tool lets you write messages using the classic dot-and-dash system of Morse code. Just press and release the spacebar to create signals!</p>
-        <p>Here’s how it works:</p>
-        <ul>
-            <li><p><b>Timer: </b>In the bottom right corner, a timer tracks how long you press the spacebar (and how long you pause) to help you time your signals.</p></li>
-            <li><p><b>Clearing Messages: </b>Click the X in the top left to clear your current message.</p></li>
-            <li><p><b>Settings: </b>Adjust your experience using the gear icon in the top right. You can set the time unit (in milliseconds) for a dot. A dash is three time units, spaces between characters are three time units, and spaces between words are seven time units.</p></li>
-            <li><p><b>Timing Flexibility: </b>You can customize the margin of error for dots, dashes, and spaces to make sending messages easier.</p></li>
-        </ul>
-        <p>Additional Features (when logged in):</p>
-        <ul>
-            <li><p>Click the cassette icon to save your telegraph message to your notes.</p></li>
-            <li><p>Click the plane icon to publish your message to the blackbox and share it with others.</p></li>
-        </ul>
-        <p>Give it a try and enjoy communicating like a 19th-century telegraph operator!</p>
-    </div>
-    <button id="info_done" style="position: absolute; top: 5px; right: 0;"><i class="fa fa-cog" style="color: white;"></i></button>
-</div>
-</div>
-
-
-
-
-
-<div id="settings_window" style="visibility: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; width: 100%; background-color: #000; position: absolute; top: 0; bottom: 0; right: 0; left: 0; gap: 10px;">
-    <div class="settings_box">
-    <div>time unit</div>
-    <input type="range" id="time_unit" min="100" max="1000" value="200" step="50">
-    <span id="time_unit_value">200</span>
     </div>
 
-    <div class="settings_box">
-    <div>dot min</div>
-    <input type ="range" id="dot_negative_margin" min="0" max="50" value="50" step="10">
-    <span id="dot_min_value">50</span>
-    </div>
+    <!-- Settings window (hidden by default) -->
+    <div id="settings_window" 
+         style="visibility: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; width: 100%; background-color: #000; position: absolute; top: 0; bottom: 0; right: 0; left: 0; gap: 10px;">
+        
+        <!-- Time unit setting -->
+        <div class="settings_box">
+            <div>time unit</div>
+            <input type="range" id="time_unit" min="100" max="1000" value="200" step="50">
+            <span id="time_unit_value">200</span>
+        </div>
 
-    <div class="settings_box">
-    <div>dot max</div>
-    <input type ="range" id="dot_positive_margin" min="0" max="50" value="50" step="10">
-    <span id="dot_max_value">50</span>
-    </div>
+        <!-- Dot timing margin settings -->
+        <div class="settings_box">
+            <div>dot min</div>
+            <input type="range" id="dot_negative_margin" min="0" max="50" value="50" step="10">
+            <span id="dot_min_value">50</span>
+        </div>
 
-    <div class="settings_box">
-    <div>dash min</div>
-    <input type ="range" id="dash_negative_margin" min="0" max="50" value="50" step="10">
-    <span id="dash_min_value">50</span>
-    </div>
+        <div class="settings_box">
+            <div>dot max</div>
+            <input type="range" id="dot_positive_margin" min="0" max="50" value="50" step="10">
+            <span id="dot_max_value">50</span>
+        </div>
 
-    <div class="settings_box">
-    <div>dash max</div>
-    <input type ="range" id="dash_positive_margin" min="0" max="50" value="50" step="10">
-    <span id="dash_max_value">50</span>
-    </div>
+        <!-- Dash timing margin settings -->
+        <div class="settings_box">
+            <div>dash min</div>
+            <input type="range" id="dash_negative_margin" min="0" max="50" value="50" step="10">
+            <span id="dash_min_value">50</span>
+        </div>
 
-    <div class="settings_box">
-    <div>letter space min</div>
-    <input type ="range" id="inter-letter_space_negative_margin" min="0" max="50" value="50" step="10">
-    <span id="letter_min_value">50</span>
-    </div>
-    
-    <div class="settings_box">
-    <div>letter space max</div>
-    <input type ="range" id="inter-letter_space_positive_margin" min="0" max="50" value="50" step="10">
-    <span id="letter_max_value">50</span>
-    </div>
+        <div class="settings_box">
+            <div>dash max</div>
+            <input type="range" id="dash_positive_margin" min="0" max="50" value="50" step="10">
+            <span id="dash_max_value">50</span>
+        </div>
 
-    <div class="settings_box">
-    <div>word space min</div>
-    <input type ="range" id="inter-word_space_negative_margin" min="0" max="50" value="50" step="10">
-    <span id="word_min_value">50</span>
-    </div>
+        <!-- Inter-letter spacing settings -->
+        <div class="settings_box">
+            <div>letter space min</div>
+            <input type="range" id="inter-letter_space_negative_margin" min="0" max="50" value="50" step="10">
+            <span id="letter_min_value">50</span>
+        </div>
+        
+        <div class="settings_box">
+            <div>letter space max</div>
+            <input type="range" id="inter-letter_space_positive_margin" min="0" max="50" value="50" step="10">
+            <span id="letter_max_value">50</span>
+        </div>
 
-    <div class="settings_box">
-    <div>word space max</div>
-    <input type ="range" id="inter-word_space_positive_margin" min="0" max="50" value="50" step="10">
-    <span id="word_max_value">50</span>
-</div>
-<button id="settings_done" style="position: absolute; top: 5px; right: 0;"><i class="fa fa-cog" style="color: white;"></i></button>
+        <!-- Inter-word spacing settings -->
+        <div class="settings_box">
+            <div>word space min</div>
+            <input type="range" id="inter-word_space_negative_margin" min="0" max="50" value="50" step="10">
+            <span id="word_min_value">50</span>
+        </div>
+
+        <div class="settings_box">
+            <div>word space max</div>
+            <input type="range" id="inter-word_space_positive_margin" min="0" max="50" value="50" step="10">
+            <span id="word_max_value">50</span>
+        </div>
+        <!-- Button to close the settings window -->
+        <button id="settings_done" style="position: absolute; top: 5px; right: 0;">
+            <i class="fa fa-cog" style="color: white;"></i>
+        </button>
+    </div>
 {% endblock %}

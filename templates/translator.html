@@ -1,16 +1,32 @@
 {% extends "layout.html" %}
-{% block title %}
-    Translator
-{% endblock %}
+{% block title %}Translator{% endblock %}
+
 {% block js %}
-<script src="/static/js/translator.js" type="module" defer></script>
+    <script src="/static/js/translator.js" type="module" defer></script>
 {% endblock %}
+
 {% block main %}
-<div style="position: absolute; display: flex; justify-content: center; top: 0px;">
-    <h1 class="box" style="width: 150px; text-align: center; padding: 5px; border-radius: 10px;">Translator</h1>
-</div>
-<div style="display: flex; gap: 20px;">
-<textarea id="translator_text" class="box" placeholder="Enter text" style="height: 350px; width: 500px; resize: none; outline: none; border-radius: 30px; padding: 15px; font-size: large;"></textarea>
-<textarea id="translator_morse" class="box" placeholder="Enter morse" style="height: 350px; width: 500px; resize: none; outline: none; border-radius: 30px; padding: 15px; font-size: large;"></textarea>
-</div>
+    <!-- Page Title -->
+    <div style="position: absolute; display: flex; justify-content: center; top: 0;">
+        <h1 class="box" style="width: 150px; text-align: center; padding: 5px; border-radius: 10px;">
+            Translator
+        </h1>
+    </div>
+
+    <!-- Input Areas for Text and Morse Code -->
+    <div style="display: flex; gap: 20px;">
+        <textarea 
+            id="translator_text" 
+            class="box" 
+            placeholder="Enter text"
+            style="height: 350px; width: 500px; resize: none; outline: none; border-radius: 30px; padding: 15px; font-size: large;">
+        </textarea>
+
+        <textarea 
+            id="translator_morse" 
+            class="box" 
+            placeholder="Enter morse"
+            style="height: 350px; width: 500px; resize: none; outline: none; border-radius: 30px; padding: 15px; font-size: large;">
+        </textarea>
+    </div>
 {% endblock %}

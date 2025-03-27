@@ -1,132 +1,206 @@
 {% extends "layout.html" %}
-{% block title %}
-    Archives
-{% endblock %}
+{% block title %}Archives{% endblock %}
+
 {% block main %}
+<!-- Main container with vertical layout and spacing -->
 <div style="display:flex; flex-direction: column; gap: 30px;">
-<div style="display: flex; gap: 20px;">
-    <div class="archive_box">
-        <div style="height: 54px; display: flex; justify-content: center; align-items: center;">
-            <p style="color: white;">Secret Agent Mission Briefing</p>
-        </div> 
-        <div style="height: 100px; display: flex; justify-content: center; align-items: center;">
-        <p>A high-stakes spy mission with coordinates, security warnings, and a dramatic escape plan.</p>
+    
+    <!-- First row of archive boxes -->
+    <div style="display: flex; gap: 20px;">
+        
+        <!-- Archive Box 1: Secret Agent Mission Briefing -->
+        <div class="archive_box">
+            <!-- Title container -->
+            <div style="height: 54px; display: flex; justify-content: center; align-items: center;">
+                <p style="color: white;">Secret Agent Mission Briefing</p>
+            </div>
+            <!-- Description container -->
+            <div style="height: 100px; display: flex; justify-content: center; align-items: center;">
+                <p>A high-stakes spy mission with coordinates, security warnings, and a dramatic escape plan.</p>
+            </div>
+            <!-- Form for viewing the archive -->
+            <form action="/archives" method="post">
+                <input type="hidden" name="story_id" value="1">
+                <button type="submit" style="font-size: 40px;">
+                    <i class="fa-solid fa-eye"></i>
+                </button>
+            </form>
+        </div>
+        
+        <!-- Archive Box 2: Alien Communication -->
+        <div class="archive_box">
+            <!-- Title container -->
+            <div style="height: 54px; display: flex; justify-content: center; align-items: center;">
+                <p style="color: white;">Alien Communication</p>
+            </div>
+            <!-- Description container -->
+            <div style="height: 100px; display: flex; justify-content: center; align-items: center;">
+                <p>A friendly message from extraterrestrials announcing their arrival and intentions to study Earth.</p>
+            </div>
+            <!-- Form for viewing the archive -->
+            <form action="/archives" method="post">
+                <input type="hidden" name="story_id" value="2">
+                <button type="submit" style="font-size: 40px;">
+                    <i class="fa-solid fa-eye"></i>
+                </button>
+            </form>
+        </div>
+        
+        <!-- Archive Box 3: Pirate Treasure Map Instructions -->
+        <div class="archive_box">
+            <!-- Title container -->
+            <div style="height: 54px; display: flex; justify-content: center; align-items: center;">
+                <p style="color: white;">Pirate Treasure Map Instructions</p>
+            </div>
+            <!-- Description container -->
+            <div style="height: 100px; display: flex; justify-content: center; align-items: center;">
+                <p>A classic pirate treasure hunt with clues, a cursed guardian, and a chest of gold.</p>
+            </div>
+            <!-- Form for viewing the archive -->
+            <form action="/archives" method="post">
+                <input type="hidden" name="story_id" value="3">
+                <button type="submit" style="font-size: 40px;">
+                    <i class="fa-solid fa-eye"></i>
+                </button>
+            </form>
+        </div>
+        
+        <!-- Archive Box 4: Time Traveler's Warning -->
+        <div class="archive_box">
+            <!-- Title container -->
+            <div style="height: 54px; display: flex; justify-content: center; align-items: center;">
+                <p style="color: white;">Time Traveler's Warning</p>
+            </div>
+            <!-- Description container -->
+            <div style="height: 100px; display: flex; justify-content: center; align-items: center;">
+                <p>A dire warning from the future about an impending disaster and instructions to prevent it.</p>
+            </div>
+            <!-- Form for viewing the archive -->
+            <form action="/archives" method="post">
+                <input type="hidden" name="story_id" value="4">
+                <button type="submit" style="font-size: 40px;">
+                    <i class="fa-solid fa-eye"></i>
+                </button>
+            </form>
+        </div>
+        
+        <!-- Archive Box 5: Mysterious Island Discovery -->
+        <div class="archive_box">
+            <!-- Title container -->
+            <div style="height: 54px; display: flex; justify-content: center; align-items: center;">
+                <p style="color: white;">Mysterious Island Discovery</p>
+            </div>
+            <!-- Description container -->
+            <div style="height: 100px; display: flex; justify-content: center; align-items: center;">
+                <p>A stranded explorer's plea for help from a dangerous, resource-rich uncharted island.</p>
+            </div>
+            <!-- Form for viewing the archive -->
+            <form action="/archives" method="post">
+                <input type="hidden" name="story_id" value="5">
+                <button type="submit" style="font-size: 40px;">
+                    <i class="fa-solid fa-eye"></i>
+                </button>
+            </form>
+        </div>
     </div>
-        <form action="/archives" method="post">
-            <input type="hidden" name="story_id" value="1">
-            <button type="submit" style="font-size: 40px;"><i class="fa-solid fa-eye"></i></button>
-        </form>
+    
+    <!-- Second row of archive boxes -->
+    <div style="display: flex; gap: 20px;">
+        
+        <!-- Archive Box 6: Superhero Call to Action -->
+        <div class="archive_box">
+            <!-- Title container -->
+            <div style="height: 54px; display: flex; justify-content: center; align-items: center;">
+                <p style="color: white;">Superhero Call to Action</p>
+            </div>
+            <!-- Description container -->
+            <div style="height: 100px; display: flex; justify-content: center; align-items: center;">
+                <p>A superhero rallying citizens to unite against a looming threat to their city.</p>
+            </div>
+            <!-- Form for viewing the archive -->
+            <form action="/archives" method="post">
+                <input type="hidden" name="story_id" value="6">
+                <button type="submit" style="font-size: 40px;">
+                    <i class="fa-solid fa-eye"></i>
+                </button>
+            </form>
+        </div>
+        
+        <!-- Archive Box 7: Lost Expedition Diary -->
+        <div class="archive_box">
+            <!-- Title container -->
+            <div style="height: 54px; display: flex; justify-content: center; align-items: center;">
+                <p style="color: white;">Lost Expedition Diary</p>
+            </div>
+            <!-- Description container -->
+            <div style="height: 100px; display: flex; justify-content: center; align-items: center;">
+                <p>A jungle explorer's journal entry about discovering an ancient temple and its mysterious dangers.</p>
+            </div>
+            <!-- Form for viewing the archive -->
+            <form action="/archives" method="post">
+                <input type="hidden" name="story_id" value="7">
+                <button type="submit" style="font-size: 40px;">
+                    <i class="fa-solid fa-eye"></i>
+                </button>
+            </form>
+        </div>
+        
+        <!-- Archive Box 8: Space Station Emergency -->
+        <div class="archive_box">
+            <!-- Title container -->
+            <div style="height: 54px; display: flex; justify-content: center; align-items: center;">
+                <p style="color: white;">Space Station Emergency</p>
+            </div>
+            <!-- Description container -->
+            <div style="height: 100px; display: flex; justify-content: center; align-items: center;">
+                <p>A distress call from a space station commander as life support systems fail.</p>
+            </div>
+            <!-- Form for viewing the archive -->
+            <form action="/archives" method="post">
+                <input type="hidden" name="story_id" value="8">
+                <button type="submit" style="font-size: 40px;">
+                    <i class="fa-solid fa-eye"></i>
+                </button>
+            </form>
+        </div>
+        
+        <!-- Archive Box 9: Fantasy Quest Prophecy -->
+        <div class="archive_box">
+            <!-- Title container -->
+            <div style="height: 54px; display: flex; justify-content: center; align-items: center;">
+                <p style="color: white;">Fantasy Quest Prophecy</p>
+            </div>
+            <!-- Description container -->
+            <div style="height: 100px; display: flex; justify-content: center; align-items: center;">
+                <p>A mythical prophecy about a hero destined to retrieve a legendary sword and save the kingdom.</p>
+            </div>
+            <!-- Form for viewing the archive -->
+            <form action="/archives" method="post">
+                <input type="hidden" name="story_id" value="9">
+                <button type="submit" style="font-size: 40px;">
+                    <i class="fa-solid fa-eye"></i>
+                </button>
+            </form>
+        </div>
+        
+        <!-- Archive Box 10: Underground Resistance Broadcast -->
+        <div class="archive_box">
+            <!-- Title container -->
+            <div style="height: 54px; display: flex; justify-content: center; align-items: center;">
+                <p style="color: white;">Underground Resistance Broadcast</p>
+            </div>
+            <!-- Description container -->
+            <div style="height: 100px; display: flex; justify-content: center; align-items: center;">
+                <p>A rallying cry from a secret resistance group, urging rebels to overthrow a tyrant with a carefully planned attack.</p>
+            </div>
+            <!-- Form for viewing the archive -->
+            <form action="/archives" method="post">
+                <input type="hidden" name="story_id" value="10">
+                <button type="submit" style="font-size: 40px;">
+                    <i class="fa-solid fa-eye"></i>
+                </button>
+            </form>
+        </div>
     </div>
-    <div class="archive_box">
-        <div style="height: 54px; display: flex; justify-content: center; align-items: center;">
-        <p style="color: white;">Alien Communication</p>
-    </div>
-    <div style="height: 100px; display: flex; justify-content: center; align-items: center;">
-        <p>A friendly message from extraterrestrials announcing their arrival and intentions to study Earth.</p>
-    </div>
-        <form action="/archives" method="post">
-            <input type="hidden" name="story_id" value="2">
-            <button type="submit" style="font-size: 40px;"><i class="fa-solid fa-eye"></i></button>
-        </form>
-    </div>
-    <div class="archive_box">
-        <div style="height: 54px; display: flex; justify-content: center; align-items: center;">
-        <p style="color: white;">Pirate Treasure Map Instructions</p>
-    </div>
-    <div style="height: 100px; display: flex; justify-content: center; align-items: center;">
-        <p>A classic pirate treasure hunt with clues, a cursed guardian, and a chest of gold.</p>
-    </div>
-        <form action="/archives" method="post">
-            <input type="hidden" name="story_id" value="3">
-            <button type="submit" style="font-size: 40px;"><i class="fa-solid fa-eye"></i></button>
-        </form>
-    </div>
-    <div class="archive_box">
-        <div style="height: 54px; display: flex; justify-content: center; align-items: center;">
-        <p style="color: white;">Time Traveler's Warning</p>
-    </div>
-    <div style="height: 100px; display: flex; justify-content: center; align-items: center;">
-        <p>A dire warning from the future about an impending disaster and instructions to prevent it.</p>
-    </div>
-        <form action="/archives" method="post">
-            <input type="hidden" name="story_id" value="4">
-            <button type="submit" style="font-size: 40px;"><i class="fa-solid fa-eye"></i></button>
-        </form>
-    </div>
-    <div class="archive_box">
-        <div style="height: 54px; display: flex; justify-content: center; align-items: center;">
-        <p style="color: white;">Mysterious Island Discovery</p>
-    </div>
-    <div style="height: 100px; display: flex; justify-content: center; align-items: center;">
-        <p>A stranded explorer's plea for help from a dangerous, resource-rich uncharted island.</p>
-    </div>
-        <form action="/archives" method="post">
-            <input type="hidden" name="story_id" value="5">
-            <button type="submit" style="font-size: 40px;"><i class="fa-solid fa-eye"></i></button>
-        </form>
-    </div>
-</div>
-<div style="display: flex; gap: 20px;">
-    <div class="archive_box">
-        <div style="height: 54px; display: flex; justify-content: center; align-items: center;">
-        <p style="color: white;">Superhero Call to Action</p>
-    </div>
-    <div style="height: 100px; display: flex; justify-content: center; align-items: center;">
-        <p>A superhero rallying citizens to unite against a looming threat to their city.</p>
-    </div>
-        <form action="/archives" method="post">
-            <input type="hidden" name="story_id" value="6">
-            <button type="submit" style="font-size: 40px;"><i class="fa-solid fa-eye"></i></button>
-        </form>
-    </div>
-    <div class="archive_box">
-        <div style="height: 54px; display: flex; justify-content: center; align-items: center;">
-        <p style="color: white;">Lost Expedition Diary</p>
-    </div>
-    <div style="height: 100px; display: flex; justify-content: center; align-items: center;">
-        <p>A jungle explorer's journal entry about discovering an ancient temple and its mysterious dangers.</p>
-    </div>
-        <form action="/archives" method="post">
-            <input type="hidden" name="story_id" value="7">
-            <button type="submit" style="font-size: 40px;"><i class="fa-solid fa-eye"></i></button>
-        </form>
-    </div>
-    <div class="archive_box">
-        <div style="height: 54px; display: flex; justify-content: center; align-items: center;">
-        <p style="color: white;">Space Station Emergency</p>
-    </div>
-    <div style="height: 100px; display: flex; justify-content: center; align-items: center;">
-        <p>A distress call from a space station commander as life support systems fail.</p>
-    </div>
-        <form action="/archives" method="post">
-            <input type="hidden" name="story_id" value="8">
-            <button type="submit" style="font-size: 40px;"><i class="fa-solid fa-eye"></i></button>
-        </form>
-    </div>
-    <div class="archive_box">
-        <div style="height: 54px; display: flex; justify-content: center; align-items: center;">
-        <p style="color: white;">Fantasy Quest Prophecy</p>
-    </div>
-    <div style="height: 100px; display: flex; justify-content: center; align-items: center;">
-        <p>A mythical prophecy about a hero destined to retrieve a legendary sword and save the kingdom.</p>
-    </div>
-        <form action="/archives" method="post">
-            <input type="hidden" name="story_id" value="9">
-            <button type="submit" style="font-size: 40px;"><i class="fa-solid fa-eye"></i></button>
-        </form>
-    </div>
-    <div class="archive_box">
-        <div style="height: 54px; display: flex; justify-content: center; align-items: center;">
-        <p style="color: white;">Underground Resistance Broadcast</p>
-    </div>
-    <div style="height: 100px; display: flex; justify-content: center; align-items: center;">
-        <p>A rallying cry from a secret resistance group, urging rebels to overthrow a tyrant with a carefully planned attack.</p>
-    </div>
-        <form action="/archives" method="post">
-            <input type="hidden" name="story_id" value="10">
-            <button type="submit" style="font-size: 40px;"><i class="fa-solid fa-eye"></i></button>
-        </form>
-    </div>
-</div>
 </div>
 {% endblock %}

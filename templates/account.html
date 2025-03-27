@@ -1,49 +1,58 @@
 {% extends "layout.html" %}
-{% block title %}
-    Account
-{% endblock %}
+{% block title %}Account{% endblock %}
+
 {% block main %}
-{% if session["id"] %}
-<div style="display: flex; gap: 40px;">
-    <div style="display: flex; flex-direction: column;">
-    <div class="box" style="width: 540px; height: 330px; border-radius: 30px; padding: 15px; overflow: hidden;">
-    <h1 style="text-align: center; margin: 0;">About You</h1>
-    <ul>
-        <li><strong>User Name: </strong>{{username}}</li>
-        <li><strong>E-mail</strong>{{email}}</li>
-        <li><strong>Account Creation:</strong>{{creation}}</li>
-    </ul>
-    </div>
-    <form action="/account" method="post">
-        <input type="hidden">
-        <button name="log_out">log out</button>
-    </form>
-</div>
-    <img src="/static/images/cow_1.jpg" alt="Greeting cow" style="width: 400px; height: 350px; border: 2px solid black; border-radius: 30px;">
-    </div>
-{% else %}
-<div style="display: flex; gap: 20px;">
-    <div style="width:fit-content; display: flex; flex-direction: column; gap: 20px;">
-        <div class="box" style="width: 200px;  padding: 20px; border-radius: 30px;">
-            <form action="/account" method="post" style="display: flex; flex-direction: column; gap: 20px;">
-                <input autocomplete="off" autofocus name="email" placeholder="e-mail" type="email" style="font-size: large;">
-                <input autocomplete="off" name="username" placeholder="User Name" type="text" style="font-size: large;">
-                <input autocomplete="off" name="password" placeholder="Password" type="password" style="font-size: large;">
-                <input autocomplete="off" name="confirmation" placeholder="Password again" type="password" style="font-size: large;">
-                <button id="account_button_register" type="submit" name="register" style="background-color: black; color: white; border-radius: 15px;">Sign Up!</button>
+    {% if session.get("id") %}
+    <!-- Logged-in user view -->
+    <div style="display: flex; gap: 40px;">
+        <!-- User information section -->
+        <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 20px;">
+            <div class="box" style="display: flex; flex-direction: column; align-items: center; justify-content: center; width: 540px; height: 240px; border-radius: 30px; padding: 15px; overflow: hidden;">
+                <h1 style="text-align: center; margin: 0;">About You</h1>
+                <ul>
+                    <li style="font-size: 30px;"><strong>User Name: </strong>{{ username }}</li>
+                    <li style="font-size: 30px;"><strong>E-mail: </strong>{{ email }}</li>
+                    <li style="font-size: 30px;"><strong>Account Creation: </strong>{{ creation }}</li>
+                </ul>
+            </div>
+            <!-- Logout button -->
+            <form action="/logout" method="post">
+                <button style="height: 90px; width: 570px; background-color: black; color: white; border-radius: 30px;">
+                    <b style="font-size: 35px;">Log Out</b>
+                </button>
             </form>
         </div>
-        <div class="box" style="width: 200px; padding: 20px; border-radius: 30px;">
-            <form action="/account" method="post" style="display: flex; flex-direction: column; gap: 20px;">
-                <input autocomplete="off" name="email-l" placeholder="e-mail" type="email" style="font-size: large;">
-                <input autocomplete="off" name="password-l" placeholder="Password" type="password" style="font-size: large;">
-                <button id="account_button_submit" type="submit" name="login" style="background-color: black; color: white; border-radius: 15px;">Sign In!</button>
-            </form>
+        <!-- Greeting image -->
+        <img src="/static/images/cow_1.jpg" alt="Greeting cow" style="width: 400px; height: 380px; border: 2px solid black; border-radius: 30px;">
+    </div>
+    {% else %}
+    <!-- Not logged-in view -->
+    <div style="display: flex; gap: 20px;">
+        <!-- Signup and login forms -->
+        <div style="width: fit-content; display: flex; flex-direction: column; gap: 20px;">
+            <!-- Sign-up form -->
+            <div class="box" style="width: 200px; padding: 20px; border-radius: 30px;">
+                <form action="/signup" method="post" style="display: flex; flex-direction: column; gap: 20px;">
+                    <input autocomplete="off" autofocus name="email" placeholder="e-mail" type="email" style="font-size: large;">
+                    <input autocomplete="off" name="username" placeholder="User Name" type="text" style="font-size: large;">
+                    <input autocomplete="off" name="password" placeholder="Password" type="password" style="font-size: large;">
+                    <input autocomplete="off" name="confirmation" placeholder="Password again" type="password" style="font-size: large;">
+                    <button id="account_button_register" type="submit" style="background-color: black; color: white; border-radius: 15px;">Sign Up!</button>
+                </form>
+            </div>
+            <!-- Sign-in form -->
+            <div class="box" style="width: 200px; padding: 20px; border-radius: 30px;">
+                <form action="/signin" method="post" style="display: flex; flex-direction: column; gap: 20px;">
+                    <input autocomplete="off" name="email-l" placeholder="e-mail" type="email" style="font-size: large;">
+                    <input autocomplete="off" name="password-l" placeholder="Password" type="password" style="font-size: large;">
+                    <button id="account_button_submit" type="submit" style="background-color: black; color: white; border-radius: 15px;">Sign In!</button>
+                </form>
+            </div>
+        </div>
+        <!-- Greeting image -->
+        <div>
+            <img src="/static/images/cow_1.jpg" alt="Greeting cow" style="width: 400px; height: 446px; border: 2px solid black; border-radius: 30px;">
         </div>
     </div>
-    <div>
-        <img src="/static/images/cow_1.jpg" alt="Greeting cow" style="width: 400px; height: 446px; border: 2px solid black; border-radius: 30px">
-    </div>
-</div>
-{% endif %}
+    {% endif %}
 {% endblock %}
