@@ -94,9 +94,8 @@ table {
   border: 2px solid black;
   display: flex;
   align-items: center;
-  justify-content: center;
   gap: 30px;
-  width: 400px;
+  width: 300px;
   padding: 10px;
   border-radius: 30px;
 }

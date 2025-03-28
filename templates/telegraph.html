@@ -102,70 +102,71 @@
     </div>
 
     <!-- Settings window (hidden by default) -->
-    <div id="settings_window" 
-         style="visibility: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; width: 100%; background-color: #000; position: absolute; top: 0; bottom: 0; right: 0; left: 0; gap: 10px;">
-        
-        <!-- Time unit setting -->
-        <div class="settings_box">
-            <div>time unit</div>
-            <input type="range" id="time_unit" min="100" max="1000" value="200" step="50">
-            <span id="time_unit_value">200</span>
-        </div>
+    <div id="settings_window" style="display: none;">
+        <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; width: 100%; background-color: #000; position: absolute; top: 0; bottom: 0; right: 0; left: 0; gap: 10px;">
+            
+            <!-- Time unit setting -->
+            <div class="settings_box">
+                <div>time unit</div>
+                <input type="range" id="time_unit" min="100" max="1000" value="200" step="50">
+                <span id="time_unit_value">200</span>
+            </div>
 
-        <!-- Dot timing margin settings -->
-        <div class="settings_box">
-            <div>dot min</div>
-            <input type="range" id="dot_negative_margin" min="0" max="50" value="50" step="10">
-            <span id="dot_min_value">50</span>
-        </div>
+            <!-- Dot timing margin settings -->
+            <div class="settings_box">
+                <div>dot min</div>
+                <input type="range" id="dot_negative_margin" min="0" max="50" value="50" step="10">
+                <span id="dot_min_value">50</span>
+            </div>
 
-        <div class="settings_box">
-            <div>dot max</div>
-            <input type="range" id="dot_positive_margin" min="0" max="50" value="50" step="10">
-            <span id="dot_max_value">50</span>
-        </div>
+            <div class="settings_box">
+                <div>dot max</div>
+                <input type="range" id="dot_positive_margin" min="0" max="50" value="50" step="10">
+                <span id="dot_max_value">50</span>
+            </div>
 
-        <!-- Dash timing margin settings -->
-        <div class="settings_box">
-            <div>dash min</div>
-            <input type="range" id="dash_negative_margin" min="0" max="50" value="50" step="10">
-            <span id="dash_min_value">50</span>
-        </div>
+            <!-- Dash timing margin settings -->
+            <div class="settings_box">
+                <div>dash min</div>
+                <input type="range" id="dash_negative_margin" min="0" max="50" value="50" step="10">
+                <span id="dash_min_value">50</span>
+            </div>
 
-        <div class="settings_box">
-            <div>dash max</div>
-            <input type="range" id="dash_positive_margin" min="0" max="50" value="50" step="10">
-            <span id="dash_max_value">50</span>
-        </div>
+            <div class="settings_box">
+                <div>dash max</div>
+                <input type="range" id="dash_positive_margin" min="0" max="50" value="50" step="10">
+                <span id="dash_max_value">50</span>
+            </div>
 
-        <!-- Inter-letter spacing settings -->
-        <div class="settings_box">
-            <div>letter space min</div>
-            <input type="range" id="inter-letter_space_negative_margin" min="0" max="50" value="50" step="10">
-            <span id="letter_min_value">50</span>
-        </div>
-        
-        <div class="settings_box">
-            <div>letter space max</div>
-            <input type="range" id="inter-letter_space_positive_margin" min="0" max="50" value="50" step="10">
-            <span id="letter_max_value">50</span>
-        </div>
+            <!-- Inter-letter spacing settings -->
+            <div class="settings_box">
+                <div>letter space min</div>
+                <input type="range" id="inter-letter_space_negative_margin" min="0" max="50" value="50" step="10">
+                <span id="letter_min_value">50</span>
+            </div>
+            
+            <div class="settings_box">
+                <div>letter space max</div>
+                <input type="range" id="inter-letter_space_positive_margin" min="0" max="50" value="50" step="10">
+                <span id="letter_max_value">50</span>
+            </div>
 
-        <!-- Inter-word spacing settings -->
-        <div class="settings_box">
-            <div>word space min</div>
-            <input type="range" id="inter-word_space_negative_margin" min="0" max="50" value="50" step="10">
-            <span id="word_min_value">50</span>
-        </div>
+            <!-- Inter-word spacing settings -->
+            <div class="settings_box">
+                <div>word space min</div>
+                <input type="range" id="inter-word_space_negative_margin" min="0" max="50" value="50" step="10">
+                <span id="word_min_value">50</span>
+            </div>
 
-        <div class="settings_box">
-            <div>word space max</div>
-            <input type="range" id="inter-word_space_positive_margin" min="0" max="50" value="50" step="10">
-            <span id="word_max_value">50</span>
+            <div class="settings_box">
+                <div>word space max</div>
+                <input type="range" id="inter-word_space_positive_margin" min="0" max="50" value="50" step="10">
+                <span id="word_max_value">50</span>
+            </div>
+            <!-- Button to close the settings window -->
+            <button id="settings_done" style="position: absolute; top: 5px; right: 0;">
+                <i class="fas fa-times" style="color: white;"></i>
+            </button>
         </div>
-        <!-- Button to close the settings window -->
-        <button id="settings_done" style="position: absolute; top: 5px; right: 0;">
-            <i class="fas fa-times" style="color: white;"></i>
-        </button>
     </div>
 {% endblock %}

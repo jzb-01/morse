@@ -1,9 +1,9 @@
 // ===================== SETTINGS WINDOW DISPLAY =====================
 document.getElementById('settings').addEventListener('click', function(){
-    document.getElementById('settings_window').style.visibility = "visible";
+    document.getElementById('settings_window').style.display = "block";
 });
 document.getElementById('settings_done').addEventListener('click', function(){
-    document.getElementById('settings_window').style.visibility = "hidden";
+    document.getElementById('settings_window').style.display = "none";
 });
 
 document.getElementById('info').addEventListener('click', function(){
