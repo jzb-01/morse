@@ -88,7 +88,7 @@ def notes():
         if notes:
             return render_template("notes.html", notes=notes, note_content="")
         else:
-            return render_template("failure.html", alert="User not found")
+            return render_template("notes.html", notes="", note_content="")
         
     else:
         return render_template("failure.html", alert="You must be logged to use this module")
@@ -121,8 +121,14 @@ def blackbox():
             return render_template("failure.html", alert="No logs found")
 
     if session.get("id"):
+        # Populate options in the blackbox selector
         logs = db.execute("SELECT * FROM Logs")
-        return render_template("blackbox.html", logs=logs, log_content="", log_creation="", log_author="")
+
+        if logs:
+            return render_template("blackbox.html", logs=logs, log_content="", log_creation="", log_author="")
+        else:
+            return render_template("blackbox.html", logs="", log_content="", log_creation="", log_author="")
+   
     else:
         return render_template("failure.html", alert="You must be logged to use this module")
 

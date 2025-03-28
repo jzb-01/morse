@@ -8,7 +8,7 @@
 
 {% block main %}
     <!-- Top Right Buttons: Settings and Info -->
-    <button id="settings" style="position: absolute; top: 0; right: 5px;">
+    <button id="settings" style="position: absolute; top: 5px; right: 0;">
         <i class="fa fa-cog"></i>
     </button>
     <button id="info" style="position: absolute; top: 5px; right: 35px;">
@@ -88,7 +88,7 @@
             </div>
             <!-- Button to Close the Information Window -->
             <button id="info_done" style="position: absolute; top: 5px; right: 0;">
-                <i class="fa fa-cog" style="color: white;"></i>
+                <i class="fas fa-times" style="color: white;"></i>
             </button>
         </div>
     </div>
@@ -108,8 +108,9 @@
                     <h1 style="font-size: 55px; margin: 0;">Report</h1>
                 </div>
                 <!-- Report Feedback Images -->
-                <img src="path/to/image.jpg" alt="Happy cow image" style="display: none;">
-                <img src="path/to/image.jpg" alt="Sad cow image" style="display: none;">
+                <img id="celebration" src="/static/images/passed_cow.jpeg" alt="Cow celebrating you passsed" style="display: none; height: 100px; width: 100px; margin-top: 30px;">
+                <img id="depression" src="/static/images/failed_cow.jpeg" alt="Cow angry at you for not passing" style="display: none; height: 100px; width: 100px; margin-top: 30px;">
+                <img id="graduation" src="/static/images/finish_cow.jpeg" alt="Cow angry at you for not passing" style="display: none; height: 100px; width: 100px; margin-top: 30px;">
                 <div style="display: flex; justify-content: center; align-items: center;">
                     <p style="font-size: 40px; text-align: center;" id="accuracy_report"></p>
                 </div>
@@ -141,7 +142,7 @@
             </div>
             <!-- Button to Close Settings Modal -->
             <button id="settings_done" style="position: absolute; top: 0; right: 0;">
-                <i class="fa fa-cog" style="color: white;"></i>
+                <i class="fas fa-times" style="color: white;"></i>
             </button>
         </div>
     </div>

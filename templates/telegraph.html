@@ -18,13 +18,10 @@
     <div>
         <form action="/telegraph" method="post">
             <!-- Readonly textarea displaying the telegraph message -->
-            <textarea id="telegraph_message" name="telegraph_message" class="box" 
-                style="height: 330px; width: 680px; border-radius: 30px; resize: none; outline: none; padding: 10px; font-size: large;" 
-                readonly>
-            </textarea>
+            <textarea id="telegraph_message" name="telegraph_message" class="box" style="height: 330px; width: 680px; border-radius: 30px; resize: none; outline: none; padding: 10px; font-size: large;" readonly></textarea>
             {% if session["id"] %}
             <!-- Save and publish buttons, visible only if user is logged in -->
-            <div style="position: absolute; top: 0; right: 35px;">
+            <div style="position: absolute; top: 5px; right: 35px;">
                 <button name="save" value="save" type="submit">
                     <i class="fa-solid fa-floppy-disk"></i>
                 </button>
@@ -45,7 +42,7 @@
 
     <!-- Info button; position changes based on session status -->
     {% if session["id"] %}
-    <button id="info" style="position: absolute; top: 5px; right: 100px;">
+    <button id="info" style="position: absolute; top: 5px; right: 110px;">
         <i class="fa fa-info-circle"></i>
     </button>
     {% else %}
@@ -99,7 +96,7 @@
             </div>
             <!-- Button to close the info window -->
             <button id="info_done" style="position: absolute; top: 5px; right: 0;">
-                <i class="fa fa-cog" style="color: white;"></i>
+                <i class="fas fa-times" style="color: white;"></i>
             </button>
         </div>
     </div>
@@ -168,7 +165,7 @@
         </div>
         <!-- Button to close the settings window -->
         <button id="settings_done" style="position: absolute; top: 5px; right: 0;">
-            <i class="fa fa-cog" style="color: white;"></i>
+            <i class="fas fa-times" style="color: white;"></i>
         </button>
     </div>
 {% endblock %}

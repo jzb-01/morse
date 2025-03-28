@@ -14,6 +14,9 @@ let visible_list = document.getElementById("visible_ls");
 let wait = document.getElementById("wait");
 let report = document.getElementById("report");
 let accuracy_report = document.getElementById("accuracy_report");
+let celebration = document.getElementById('celebration');
+let depression = document.getElementById('depression');
+let graduation = document.getElementById('graduation');
 let continue_button = document.getElementById("continue");
 let try_again_button = document.getElementById("try_again");
 let quit_button = document.getElementById("quit");
@@ -106,10 +109,12 @@ evaluation_button.addEventListener('click', function() {
     if (accuracy >= 90) {
         if (level == (list.length - 1)) {
             accuracy_report.innerHTML = "Congratulations you finish the set, your accuracy was: " + accuracy + "%!";
+            graduation.style.display = "block";
             try_again_button.style.display = "block";
             finish_button.style.display = "block";
         } else {
             accuracy_report.innerHTML = "Congratulations, your accuracy was: " + accuracy + "%!";
+            celebration.style.display = "block"
             continue_button.style.display = "block";
             try_again_button.style.display = "block";
             quit_button.style.display = "block";
@@ -117,6 +122,7 @@ evaluation_button.addEventListener('click', function() {
         }
     } else {
         accuracy_report.innerHTML = "Sorry, your accuracy was: " + accuracy + "%";
+        depression.style.display = "block"
         try_again_button.style.display = "block";
         quit_button.style.display = "block";
     }
@@ -133,6 +139,9 @@ continue_button.addEventListener('click', () => {
   restart_button.disabled = false;
   stop_button.disabled = false;
   report.style.display = "none";
+  celebration.style.display = "none";
+  depression.style.display = "none";
+  graduation.style.display = "none";
   continue_button.style.display = "none";
   try_again_button.style.display = "none";
   quit_button.style.display = "none";
@@ -144,6 +153,9 @@ try_again_button.addEventListener('click', () => {
   restart_button.disabled = false;
   stop_button.disabled = false;
   report.style.display = "none";
+  celebration.style.display = "none";
+  depression.style.display = "none";
+  graduation.style.display = "none";
   continue_button.style.display = "none";
   try_again_button.style.display = "none";
   quit_button.style.display = "none";
@@ -154,6 +166,9 @@ try_again_button.addEventListener('click', () => {
 quit_button.addEventListener('click', () => {
   start_button.disabled = false;
   report.style.display = "none";
+  celebration.style.display = "none";
+  depression.style.display = "none";
+  graduation.style.display = "none";
   continue_button.style.display = "none";
   try_again_button.style.display = "none";
   quit_button.style.display = "none";
@@ -164,6 +179,9 @@ quit_button.addEventListener('click', () => {
 finish_button.addEventListener('click', () => {
     start_button.disabled = false;
     report.style.display = "none";
+    celebration.style.display = "none";
+    depression.style.display = "none";
+    graduation.style.display = "none";
     continue_button.style.display = "none";
     try_again_button.style.display = "none";
     quit_button.style.display = "none";
