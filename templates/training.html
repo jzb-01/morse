@@ -51,7 +51,7 @@
     <b id="beep_count" style="position: absolute; bottom: 5px; right: 5px; color: red;"></b>
     <b id="level_count" style="position: absolute; bottom: 5px; left: 5px; color: red;"></b>
 
-    <!-- Information Window Modal -->
+    <!-- Information Window -->
     <div id="info_window" style="display: none;">
         <div style="display: flex; align-items: center; justify-content: center; height: 100%; width: 100%; background-color: #000; position: absolute; top: 0; bottom: 0; right: 0; left: 0;">
             <div class="box" style="border-radius: 30px; width: 720px; height: 500px; padding: 10px;">
@@ -93,14 +93,14 @@
         </div>
     </div>
 
-    <!-- Wait Modal -->
+    <!-- Wait -->
     <div id="wait" style="display: none;">
         <div style="display: flex; align-items: center; justify-content: center; background-color: #000; position: absolute; top: 0; bottom: 0; right: 0; left: 0;">
             <p class="box" style="font-size: 50px; border-radius: 30px; padding: 10px;">Please wait...</p>
         </div>
     </div>
 
-    <!-- Report Modal -->
+    <!-- Report -->
     <div id="report" style="display: none;">
         <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; background-color: #000; position: absolute; top: 0; bottom: 0; right: 0; left: 0; gap: 15px;">
             <div class="box" style="display: flex; flex-direction: column; align-items: center; justify-content: center; border-radius: 30px; width: 700px; padding: 10px;">
@@ -109,7 +109,7 @@
                 </div>
                 <!-- Report Feedback Images -->
                 <img id="celebration" src="/static/images/passed_cow.jpeg" alt="Cow celebrating you passsed" style="display: none; height: 100px; width: 100px; margin-top: 30px;">
-                <img id="depression" src="/static/images/failed_cow.jpeg" alt="Cow angry at you for not passing" style="display: none; height: 100px; width: 100px; margin-top: 30px;">
+                <img id="depression" src="/static/images/failed_cow.jpeg" alt="Cow sad for you not passing" style="display: none; height: 100px; width: 100px; margin-top: 30px;">
                 <img id="graduation" src="/static/images/finish_cow.jpeg" alt="Cow angry at you for not passing" style="display: none; height: 100px; width: 100px; margin-top: 30px;">
                 <div style="display: flex; justify-content: center; align-items: center;">
                     <p style="font-size: 40px; text-align: center;" id="accuracy_report"></p>
@@ -125,7 +125,7 @@
         </div>
     </div>
 
-    <!-- Settings Modal -->
+    <!-- Settings -->
     <div id="settings_window" style="display: none;">
         <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; background-color: black; position: absolute; top: 0; bottom: 0; right: 0; left: 0; gap: 15px;">
             <!-- Checkbox Options for Character Types -->
@@ -140,7 +140,7 @@
                 <input type="range" id="time_unit" min="100" max="1000" value="200" step="50">
                 <span id="time_unit_value">200</span>
             </div>
-            <!-- Button to Close Settings Modal -->
+            <!-- Button to Close Settings -->
             <button id="settings_done" style="position: absolute; top: 0; right: 0;">
                 <i class="fas fa-times" style="color: white;"></i>
             </button>

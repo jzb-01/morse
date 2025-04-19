@@ -1,7 +1,7 @@
-// Import functions for sound and delay management
+// ===== Imports =====
 import { beep, delay } from './functions.js';
 
-// DOM element references
+// ===================== VARIABLE DECLARATIONS =====================
 let table_name = document.querySelector('h1');
 let right_button = document.getElementById('right');
 let left_button = document.getElementById('left');
@@ -9,9 +9,9 @@ let table_1 = document.getElementById('table_1');
 let table_2 = document.getElementById('table_2');
 let table_3 = document.getElementById('table_3');
 let playButtons = document.querySelectorAll('table button');
-let audioCtx = null; // Initialize audio context for sound playback
+let audioCtx = null; // Audio context for sound playback
 
-// Handle right button click to cycle forward through tables
+// === Handle right button click to cycle forward through tables ===
 right_button.addEventListener('click', function() {
   if (table_1.style.display === 'table') {
     table_1.style.display = 'none';
@@ -28,7 +28,7 @@ right_button.addEventListener('click', function() {
   }
 });
 
-// Handle left button click to cycle backward through tables
+// === Handle left button click to cycle backward through tables ===
 left_button.addEventListener('click', function() {
   if (table_1.style.display === 'table') {
     table_1.style.display = 'none';
@@ -45,7 +45,7 @@ left_button.addEventListener('click', function() {
   }
 });
 
-// Play the Morse code sound when a button is clicked
+// === Play the Morse code sound when a button is clicked ===
 playButtons.forEach(button => {
   button.addEventListener('click', async function() {
     // Disable all buttons to prevent multiple clicks
@@ -77,7 +77,7 @@ playButtons.forEach(button => {
   });
 });
 
-// Update displayed time unit value when input changes
+// === Update displayed time unit value when input changes ===
 document.getElementById('time_unit').addEventListener('input', function() {
   document.getElementById('time_unit_value').innerHTML = document.getElementById('time_unit').value;
 });

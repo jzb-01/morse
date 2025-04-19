@@ -19,4 +19,25 @@
 
         <textarea id="translator_morse" class="box" placeholder="Enter morse" style="height: 350px; width: 500px; resize: none; outline: none; border-radius: 30px; padding: 15px; font-size: large;"></textarea>
     </div>
+    <!-- Controls Section -->
+    <div style="position: absolute; display: flex; justify-content: center; bottom: 20px;">
+        <div class="box" style="display: flex; align-items: center; gap: 20px; width: 400px; padding: 10px; margin:auto; margin-top: 20px; border-radius: 10px;">
+        <!-- Play Button -->
+        <button id="play" disabled>
+            <i class="fas fa-play"></i>
+        </button>
+        <!-- Stop Button -->
+        <button id="stop" disabled="true">
+            <i class="fa fa-stop"></i>
+        </button>
+        <!-- Time Unit Label -->
+        <div>
+            <b>Time unit</b>
+        </div>
+        <!-- Time Unit Slider -->
+        <input type="range" id="time_unit" min="100" max="1000" value="200" step="50">
+        <!-- Display for Time Unit Value -->
+        <b id="time_unit_value">200</b>
+        </div>
+    </div>
 {% endblock %}

@@ -2,7 +2,7 @@
 import { dictionary, alphabet, numbers, specialCharacters } from './data.js';
 import { beep, delay, checkls } from './functions.js';
 
-// ===== Variable Declarations =====
+// ===================== VARIABLE DECLARATIONS =====================
 let time_unit_setting = document.getElementById("time_unit");
 let time_unit = Number(time_unit_setting.value);
 let user_input = document.getElementById("user_input");
@@ -26,37 +26,35 @@ let level_count = document.getElementById("level_count");
 let morse_output = [];
 let list = [...alphabet];
 let level = 1;
-let interrupt = false;
 let accuracy = 0;
-let audioCtx = null;
+let audioCtx = null; // Audio context for sound playback
+let interrupt = false; // Flag to handle interruptions
 
-// ===== Event Listeners =====
-// Settings window control
+// === Settings window control ===
 document.getElementById('settings').addEventListener('click', () => document.getElementById('settings_window').style.display = "block");
 document.getElementById('settings_done').addEventListener('click', () => document.getElementById('settings_window').style.display = "none");
 document.getElementById('info').addEventListener('click', () => document.getElementById('info_window').style.display = "block");
 document.getElementById('info_done').addEventListener('click', () => document.getElementById('info_window').style.display = "none");
 
-// ===== Shuffle List =====
+// === Shuffle List ===
 for (let x = list.length - 1; x > 0; x--) {
   let random = Math.floor(Math.random() * (x+1));
   [list[x], list[random]] = [list[random], list[x]];
 }
 visible_list.innerHTML = list[0] + ' ' + list[1] + ' ';
 
-// ===== Time Unit Update =====
+// === Time Unit Update ===
 time_unit_setting.addEventListener("input", (event) => {
   document.getElementById('time_unit_value').textContent = event.target.value;
   time_unit = Number(event.target.value);
 });
 
-// ===== Character Selection =====
+// === Character Selection ===
 checkls('alphabet', alphabet, list, visible_list);
 checkls('numbers', numbers, list, visible_list);
 checkls('special', specialCharacters, list, visible_list);
 
-// ===== Main Buttons =====
-// Start Training
+// === Start Training ===
 start_button.addEventListener('click', () => {
   if (!audioCtx) {
     audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -67,7 +65,7 @@ start_button.addEventListener('click', () => {
   training();
 });
 
-// Stop Training
+// === Stop Training ===
 stop_button.addEventListener('click', async () => {
   interrupt = true;
   wait.style.display = "block";
@@ -79,7 +77,7 @@ stop_button.addEventListener('click', async () => {
   wait.style.display = "none";
 });
 
-// Restart Training
+// === Restart Training ===
 restart_button.addEventListener('click', async () => {
   interrupt = true;
   wait.style.display = "block";
@@ -90,7 +88,7 @@ restart_button.addEventListener('click', async () => {
   training();
 });
 
-// ===== Evaluation =====
+// === Evaluation ===
 evaluation_button.addEventListener('click', function() {
 
     start_button.disabled = true;
@@ -132,7 +130,7 @@ evaluation_button.addEventListener('click', function() {
 });
 
 
-// ===== Report Buttons =====
+// === Report Buttons ===
 continue_button.addEventListener('click', () => {
   level++;
   visible_list.innerHTML += list[level] + ' ';
@@ -190,7 +188,7 @@ finish_button.addEventListener('click', () => {
 });
 
 
-// ===== Quit Training =====
+// === Quit Training ===
 async function quit() {
   level = 1;
   for (let x = list.length - 1; x > 0; x--) {
@@ -204,7 +202,7 @@ async function quit() {
   level_count.textContent = "";
 }
 
-// ===== Training Function =====
+// === Training Function ===
 async function training() {
   morse_output = [];
   user_input.value = '';

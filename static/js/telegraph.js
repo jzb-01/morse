@@ -15,6 +15,7 @@ document.getElementById('info_done').addEventListener('click', function(){
 
 
 // ===================== VARIABLE DECLARATIONS =====================
+let telegraph_button = document.getElementById("telegraph_button");
 let message = document.getElementById("telegraph_message");
 let clear = document.getElementById("clear_button");
 let timer_flag = false;
@@ -24,7 +25,7 @@ let other_timer;
 let timer = 0;
 
 
-// Initialize variables for time unit and margins
+// === Initialize variables for time unit and margins ===
 let time_unit = Number(document.getElementById("time_unit").value);
 let dot_min = (time_unit / 100) * Number(document.getElementById("dot_negative_margin").value);
 let dot_max = (time_unit / 100) * Number(document.getElementById("dot_positive_margin").value);
@@ -36,8 +37,7 @@ let word_min = ((time_unit * 7) / 100) * Number(document.getElementById("inter-w
 let word_max = ((time_unit * 7) / 100) * Number(document.getElementById("inter-word_space_positive_margin").value);
 
 
-// ===================== UPDATE VARIABLES ON INPUT =====================
-// Time Unit Update
+// === Time Unit Update ===
 document.getElementById('time_unit').addEventListener('input', function(event) {
     document.getElementById('time_unit_value').textContent = event.target.value;
     time_unit = Number(event.target.value);
@@ -53,7 +53,7 @@ document.getElementById('time_unit').addEventListener('input', function(event) {
     word_max = ((time_unit * 7) / 100) * Number(document.getElementById("inter-word_space_positive_margin").value);
 });
 
-// Margin Updates with Display
+// === Margin Updates with Display ===
 document.getElementById("dot_negative_margin").addEventListener("input", function(event){
     document.getElementById('dot_min_value').textContent = event.target.value;
     dot_min = (time_unit/100) * Number(document.getElementById("dot_negative_margin").value);
@@ -87,8 +87,7 @@ document.getElementById("inter-word_space_positive_margin").addEventListener("in
     word_max = ((time_unit*7)/100) * Number(document.getElementById("inter-word_space_positive_margin").value);
 });
 
-// ===================== TELEGRAPH FUNCTIONALITY =====================
-// Timer increment function
+// === Timer increment function ===
 function increase() {
     if (timer > time_unit * 1.5) {
         clearInterval(intervalID);
@@ -101,10 +100,11 @@ function increase() {
     }
 }
 
-// Keydown event: Start timer and check for inter-letter or inter-word spaces
+// === Keydown event: Start timer and check for inter-letter or inter-word spaces ===
 document.addEventListener("keydown", function(event) {
     if (event.key === " ") {
-        if (!timer_flag) {
+        telegraph_button.style.backgroundColor = "white";
+        if (!timer_flag && !timer_check) {
             intervalID = setInterval(increase, 10);
             timer_flag = true;
         }
@@ -124,8 +124,9 @@ document.addEventListener("keydown", function(event) {
     }
 });
 
-// Keyup event: Identify dot, dash, or space
+// === Keyup event: Identify dot, dash, or space ===
 document.addEventListener("keyup", function(event) {
+    telegraph_button.style.backgroundColor = "black";
     if (event.key === " ") {
         if (timer !== 0) {
             other_timer = timer;
@@ -141,7 +142,7 @@ document.addEventListener("keyup", function(event) {
     }
 });
 
-// Clear button functionality
+// === Clear button functionality ===
 clear.addEventListener('click', function() {
     message.textContent = '';
     clearInterval(intervalID);

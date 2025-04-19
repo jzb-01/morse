@@ -1,21 +1,21 @@
-// Import necessary functions from functions.js
-import { beep, delay } from './functions.js'
+// ===== Imports =====
+import { beep, delay } from './functions.js';
 
-// Select relevant DOM elements
+// ===================== VARIABLE DECLARATIONS =====================
 let playButton = document.getElementById('play');
 let stopButton = document.getElementById('stop');
 let time = document.getElementById('time_unit');
 let time_range = document.getElementById('time_unit_value');
 let message = document.getElementById('message').textContent;
-let audioCtx = null; // Initialize audio context for sound playback
+let audioCtx = null; // Audio context for sound playback
 let interrupt = false; // Flag to handle interruptions
 
-// Update time range display when the input changes
+// === Update time range display when the input changes ===
 time.addEventListener('input', function() {
   time_range.textContent = time.value;
 });
 
-// Handle play button click - Plays the Morse code message using beeps
+// === Handle play button click - Plays the Morse code message using beeps ===
 playButton.addEventListener('click', async function() {
   playButton.disabled = true;
   stopButton.disabled = false;
@@ -53,7 +53,7 @@ playButton.addEventListener('click', async function() {
   stopButton.disabled = true;
 });
 
-// Handle stop button click - Interrupts playback
+// === Handle stop button click - Interrupts playback ===
 stopButton.addEventListener('click', function() {
   interrupt = true;
   stopButton.disabled = true;

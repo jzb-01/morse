@@ -1,3 +1,4 @@
+// Dictionaries for morse and text
 const dictionary = {
     'A': '.-',    'B': '-...',  'C': '-.-.',  'D': '-..',   'E': '.',  
     'F': '..-.',  'G': '--.',   'H': '....',  'I': '..',    'J': '.---',
@@ -28,6 +29,7 @@ const reverse_dictionary = {
     '..--.-': '_', '.-..-.': '"', '...-..-': '$', '.--.-.': '@', '/': ' '
   };
 
+// Arrays for the training module  
 const alphabet = [
     'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 
     'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 

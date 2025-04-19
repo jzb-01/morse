@@ -1,19 +1,17 @@
-// Import functions for sound and delay management
+// ===== Imports =====
 import { beep, delay } from './functions.js';
 
-// === Element References ===
-const notesSelect = document.getElementById("notes_select");
-const notesButton = document.getElementById("notes_button");
-const noteContent = document.getElementById("note_content");
-const playButton = document.getElementById("play_button");
-const stopButton = document.getElementById("stop_button");
-const restartButton = document.getElementById("restart_button");
-const timeUnitSetting = document.getElementById('time_unit_settings');
-
-// === Variables ===
-let interrupt = false;
+// ===================== VARIABLE DECLARATIONS =====================
+let notesSelect = document.getElementById("notes_select");
+let notesButton = document.getElementById("notes_button");
+let noteContent = document.getElementById("note_content");
+let playButton = document.getElementById("play_button");
+let stopButton = document.getElementById("stop_button");
+let restartButton = document.getElementById("restart_button");
+let timeUnitSetting = document.getElementById('time_unit_settings');
 let timeUnit = Number(timeUnitSetting.value);
-let audioCtx = null; // Initialize audio context for sound playback
+let audioCtx = null; // Audio context for sound playback
+let interrupt = false; // Flag to handle interruptions
 
 // === Time Unit Update ===
 timeUnitSetting.addEventListener("input", (event) => {
@@ -32,7 +30,7 @@ notesSelect.addEventListener('input', function() {
     }
 });
 
-// Enable play button if log content exists
+// === Enable play button if log content exists ===
 if (noteContent.innerHTML !== ""){
   playButton.disabled = false;
 }; 
