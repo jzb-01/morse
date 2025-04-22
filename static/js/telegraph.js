@@ -105,6 +105,7 @@ document.addEventListener("keydown", function(event) {
     if (event.key === " ") {
         telegraph_button.style.backgroundColor = "white";
         if (!timer_flag && !timer_check) {
+            // DDB helped me with the use of setInterval
             intervalID = setInterval(increase, 10);
             timer_flag = true;
         }

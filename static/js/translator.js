@@ -18,14 +18,14 @@ text_box.addEventListener('input', () => {
 
     // Loop through each character of the input text
     for (let x = 0; x < text_box.value.length; x++) {
-      const char = text_box.value[x];
+      let char = text_box.value[x];
 
       if (char === "\n") {
         // Preserve new lines in translation
         morse_translation += '\n';
       } else {
         // Convert to uppercase for dictionary lookup
-        const upperChar = char.toUpperCase();
+        let upperChar = char.toUpperCase();
 
         if (dictionary.hasOwnProperty(upperChar)) {
           // Append corresponding Morse code
@@ -56,7 +56,7 @@ morse_box.addEventListener('input', () => {
 
     // Loop through each character of the input Morse code
     for (let x = 0; x < morse_box.value.length; x++) {
-      const char = morse_box.value[x];
+      let char = morse_box.value[x];
 
       if (char !== " " && char !== "/" && char !== "\n") {
         // Build the Morse code character until a space, slash, or newline is found

@@ -116,7 +116,6 @@ evaluation_button.addEventListener('click', function() {
             continue_button.style.display = "block";
             try_again_button.style.display = "block";
             quit_button.style.display = "block";
-            console.log("you should be seen the three");
         }
     } else {
         accuracy_report.innerHTML = "Sorry, your accuracy was: " + accuracy + "%";
@@ -245,7 +244,6 @@ async function training() {
     await delay(time_unit * 2);
   }
   
-  console.log(morse_output);
   stop_button.disabled = true;
   evaluation_button.disabled = false;
   

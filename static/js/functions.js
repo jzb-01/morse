@@ -1,4 +1,5 @@
 // Function to generate a beep sound
+// DDB helped me to create this function
 // Parameters:
 // - audio: AudioContext instance
 // - duration: Duration of the beep in milliseconds
@@ -12,6 +13,7 @@ function beep(audio, duration) {
 }
   
 // Function to create a delay using Promises
+// DDB helped me to create this function
 // Parameters:
 // - duration: Duration of the delay in milliseconds
 function delay(duration) {
@@ -31,12 +33,12 @@ function checkls(element_id, characters, final_list, display) {
     if (!document.getElementById('alphabet').checked &&
         !document.getElementById('numbers').checked &&
         !document.getElementById('special').checked) {
-      console.log("At least one checkbox must remain checked.");
       this.checked = true;
       return;
     }
 
     // Add or remove characters based on checkbox state
+    // DDB helped with the use of .includes, .push and .splice
     if (this.checked) {
       characters.forEach(item => {
         if (!final_list.includes(item)) {
@@ -63,8 +65,6 @@ function checkls(element_id, characters, final_list, display) {
     // Update display with the first two characters from the shuffled list
     display.innerHTML = '';
     display.innerHTML += final_list[0] + ' ' + final_list[1] + ' ';
-
-    console.log(final_list);
   });
 }
 
