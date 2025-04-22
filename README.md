@@ -1,5 +1,5 @@
-# C.O.W (Continues Online Wave)
-#### Video Demo: placeholder
+# Continues Online Wave (C.O.W)
+#### Video Demo: https://youtu.be/szzkuMdqhXI
 #### Description (everything below)
 C.O.W (Continues Online Wave) is an interactive web application i designed to help people learn Morse code. It provides both informative content about Morse code and interactive tools to practice and test oneself. Users can listen to Morse code sounds, decode fictional messages, translate text into Morse code, and train using a method inspired by the Koch method. Additionally, users can create accounts to save notes and publish messages using a virtual telegraph.
 #### Technologies Used
